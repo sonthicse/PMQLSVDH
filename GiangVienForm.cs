@@ -1,3 +1,8 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace PMQLSVDH
 {
     public partial class GiangVienForm : Form
@@ -7,11 +12,14 @@ namespace PMQLSVDH
         private UserControlTrangChu trangChu;
         private UserControlLopHoc lopHoc;
         private UserControlCaiDat caiDat;
+        private GiangVien giangVien;
 
         private readonly Color btnDefaultColor = Color.FromKnownColor(KnownColor.ControlLight);
         private readonly Color btnSelectedColor = Color.FromKnownColor(KnownColor.ControlDark);
+
         public GiangVienForm()
         {
+            giangVien = DatabaseHelper.LoadGiangVienTree("GV001");
             InitializeComponent();
             InitializeNavigationButton();
             InitializeNavigationControl();
@@ -22,8 +30,9 @@ namespace PMQLSVDH
             trangChu = new UserControlTrangChu();
             lopHoc = new UserControlLopHoc();
             caiDat = new UserControlCaiDat();
-            var userControls = new List<UserControl> { trangChu, lopHoc, caiDat };
-            navigationControl = new NavigationControl(userControls, panel);
+
+            var controls = new List<UserControl> { trangChu, lopHoc, caiDat };
+            navigationControl = new NavigationControl(controls, panel);
             navigationControl.Display(0);
         }
 
@@ -44,7 +53,7 @@ namespace PMQLSVDH
         {
             navigationControl.Display(1);
             navigationButton.Highlight(buttonLopHoc);
-            DatabaseHelper.LoadDataGV("GV002", lopHoc.dataGridView);
+            UserControlLopHoc.LoadAllStudents(lopHoc.dataGridView, giangVien); // bỏ lọc cứng "L001"
         }
 
         private void buttonCaiDat_Click(object sender, EventArgs e)
@@ -53,10 +62,6 @@ namespace PMQLSVDH
             navigationButton.Highlight(buttonCaiDat);
         }
 
-        private void buttonDangXuat_Click(object sender, EventArgs e)
-        {
-            //Application.Exit();
-            this.Close();
-        }
+        private void buttonDangXuat_Click(object sender, EventArgs e) => Close();
     }
 }

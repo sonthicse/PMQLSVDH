@@ -157,42 +157,49 @@
             // 
             // LopHoc
             // 
+            LopHoc.DataPropertyName = "LopHoc";
             LopHoc.HeaderText = "Lớp";
             LopHoc.Name = "LopHoc";
             LopHoc.ReadOnly = true;
             // 
             // MaSV
             // 
+            MaSV.DataPropertyName = "MaSV";
             MaSV.HeaderText = "Mã SV";
             MaSV.Name = "MaSV";
             MaSV.ReadOnly = true;
             // 
             // TenSV
             // 
+            TenSV.DataPropertyName = "TenSV";
             TenSV.HeaderText = "Họ và tên";
             TenSV.Name = "TenSV";
             TenSV.ReadOnly = true;
             // 
             // NgaySinh
             // 
+            NgaySinh.DataPropertyName = "NgaySinh";
             NgaySinh.HeaderText = "Ngày sinh";
             NgaySinh.Name = "NgaySinh";
             NgaySinh.ReadOnly = true;
             // 
             // GioiTinh
             // 
+            GioiTinh.DataPropertyName = "GioiTinh";
             GioiTinh.HeaderText = "Giới tính";
             GioiTinh.Name = "GioiTinh";
             GioiTinh.ReadOnly = true;
             // 
             // Diem_CC
             // 
+            Diem_CC.DataPropertyName = "Diem_CC";
             Diem_CC.HeaderText = "Điểm CC";
             Diem_CC.Name = "Diem_CC";
             Diem_CC.ReadOnly = true;
             // 
             // Diem_TX
             // 
+            Diem_TX.DataPropertyName = "Diem_TX";
             Diem_TX.HeaderText = "Điểm TX";
             Diem_TX.Name = "Diem_TX";
             Diem_TX.ReadOnly = true;

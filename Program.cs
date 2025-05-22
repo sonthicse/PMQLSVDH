@@ -20,7 +20,7 @@ namespace PMQLSVDH
             ApplicationConfiguration.Initialize();
             Application.Run(new LoginForm());
             Application.Run(new GiangVienForm());
-            //Application.Run(new AdminForm());
+            Application.Run(new AdminForm());
         }
     }
 }
