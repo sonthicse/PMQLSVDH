@@ -34,24 +34,28 @@
             textBoxSearch = new TextBox();
             label1 = new Label();
             dataGridView = new DataGridView();
+            MaLop = new DataGridViewTextBoxColumn();
+            KhoaHoc = new DataGridViewTextBoxColumn();
+            TenLop = new DataGridViewTextBoxColumn();
+            SoHS = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
             buttonThemMH = new Button();
             buttonThemSV = new Button();
-            dataGridViewSinhVien = new DataGridView();
+            dataGridViewSV = new DataGridView();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            dataGridViewMonHoc = new DataGridView();
+            textBoxMaLop = new TextBox();
+            textBoxTenLop = new TextBox();
+            textBoxKhoaHoc = new TextBox();
+            dataGridViewMH = new DataGridView();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSV).BeginInit();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMonHoc).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMH).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -69,7 +73,7 @@
             // 
             // buttonThem
             // 
-            buttonThem.Font = new Font("Segoe UI", 12F);
+            buttonThem.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             buttonThem.Location = new Point(1250, 10);
             buttonThem.Name = "buttonThem";
             buttonThem.Size = new Size(75, 30);
@@ -79,12 +83,12 @@
             // 
             // buttonSearch
             // 
-            buttonSearch.Font = new Font("Segoe UI", 12F);
+            buttonSearch.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             buttonSearch.Location = new Point(170, 120);
             buttonSearch.Name = "buttonSearch";
             buttonSearch.Size = new Size(100, 30);
             buttonSearch.TabIndex = 3;
-            buttonSearch.Text = "TIMKIEM";
+            buttonSearch.Text = "TÌM KIẾM";
             buttonSearch.UseVisualStyleBackColor = true;
             // 
             // textBoxSearch
@@ -108,20 +112,50 @@
             // 
             // dataGridView
             // 
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToDeleteRows = false;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Columns.AddRange(new DataGridViewColumn[] { MaLop, KhoaHoc, TenLop, SoHS });
             dataGridView.Location = new Point(300, 50);
             dataGridView.Name = "dataGridView";
+            dataGridView.ReadOnly = true;
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView.Size = new Size(1024, 330);
             dataGridView.TabIndex = 0;
+            // 
+            // MaLop
+            // 
+            MaLop.HeaderText = "Mã Lớp";
+            MaLop.Name = "MaLop";
+            MaLop.ReadOnly = true;
+            // 
+            // KhoaHoc
+            // 
+            KhoaHoc.HeaderText = "Khóa học";
+            KhoaHoc.Name = "KhoaHoc";
+            KhoaHoc.ReadOnly = true;
+            KhoaHoc.Visible = false;
+            // 
+            // TenLop
+            // 
+            TenLop.HeaderText = "Tên Lớp";
+            TenLop.Name = "TenLop";
+            TenLop.ReadOnly = true;
+            // 
+            // SoHS
+            // 
+            SoHS.HeaderText = "Tổng số học sinh";
+            SoHS.Name = "SoHS";
+            SoHS.ReadOnly = true;
             // 
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLightLight;
             panel2.Controls.Add(buttonThemMH);
             panel2.Controls.Add(buttonThemSV);
-            panel2.Controls.Add(dataGridViewSinhVien);
+            panel2.Controls.Add(dataGridViewSV);
             panel2.Controls.Add(tableLayoutPanel1);
-            panel2.Controls.Add(dataGridViewMonHoc);
+            panel2.Controls.Add(dataGridViewMH);
             panel2.Font = new Font("Segoe UI", 12F);
             panel2.Location = new Point(20, 440);
             panel2.Name = "panel2";
@@ -130,7 +164,7 @@
             // 
             // buttonThemMH
             // 
-            buttonThemMH.Font = new Font("Segoe UI", 12F);
+            buttonThemMH.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             buttonThemMH.Location = new Point(1249, 10);
             buttonThemMH.Name = "buttonThemMH";
             buttonThemMH.Size = new Size(75, 30);
@@ -140,7 +174,7 @@
             // 
             // buttonThemSV
             // 
-            buttonThemSV.Font = new Font("Segoe UI", 12F);
+            buttonThemSV.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             buttonThemSV.Location = new Point(780, 10);
             buttonThemSV.Name = "buttonThemSV";
             buttonThemSV.Size = new Size(75, 30);
@@ -149,13 +183,13 @@
             buttonThemSV.UseVisualStyleBackColor = true;
             buttonThemSV.Click += buttonThemSV_Click;
             // 
-            // dataGridViewSinhVien
+            // dataGridViewSV
             // 
-            dataGridViewSinhVien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewSinhVien.Location = new Point(405, 50);
-            dataGridViewSinhVien.Name = "dataGridViewSinhVien";
-            dataGridViewSinhVien.Size = new Size(450, 330);
-            dataGridViewSinhVien.TabIndex = 2;
+            dataGridViewSV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewSV.Location = new Point(405, 50);
+            dataGridViewSV.Name = "dataGridViewSV";
+            dataGridViewSV.Size = new Size(450, 330);
+            dataGridViewSV.TabIndex = 2;
             // 
             // tableLayoutPanel1
             // 
@@ -165,9 +199,9 @@
             tableLayoutPanel1.Controls.Add(label2, 0, 0);
             tableLayoutPanel1.Controls.Add(label3, 0, 1);
             tableLayoutPanel1.Controls.Add(label4, 0, 2);
-            tableLayoutPanel1.Controls.Add(textBox1, 1, 0);
-            tableLayoutPanel1.Controls.Add(textBox2, 1, 1);
-            tableLayoutPanel1.Controls.Add(textBox3, 1, 2);
+            tableLayoutPanel1.Controls.Add(textBoxMaLop, 1, 0);
+            tableLayoutPanel1.Controls.Add(textBoxTenLop, 1, 1);
+            tableLayoutPanel1.Controls.Add(textBoxKhoaHoc, 1, 2);
             tableLayoutPanel1.Location = new Point(20, 20);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
@@ -207,43 +241,46 @@
             label4.TabIndex = 2;
             label4.Text = "Khóa học:";
             // 
-            // textBox1
+            // textBoxMaLop
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Font = new Font("Segoe UI", 12F);
-            textBox1.Location = new Point(103, 3);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(234, 29);
-            textBox1.TabIndex = 3;
+            textBoxMaLop.BorderStyle = BorderStyle.FixedSingle;
+            textBoxMaLop.Dock = DockStyle.Fill;
+            textBoxMaLop.Enabled = false;
+            textBoxMaLop.Font = new Font("Segoe UI", 12F);
+            textBoxMaLop.Location = new Point(103, 3);
+            textBoxMaLop.Name = "textBoxMaLop";
+            textBoxMaLop.Size = new Size(234, 29);
+            textBoxMaLop.TabIndex = 3;
             // 
-            // textBox2
+            // textBoxTenLop
             // 
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Dock = DockStyle.Fill;
-            textBox2.Font = new Font("Segoe UI", 12F);
-            textBox2.Location = new Point(103, 99);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(234, 29);
-            textBox2.TabIndex = 4;
+            textBoxTenLop.BorderStyle = BorderStyle.FixedSingle;
+            textBoxTenLop.Dock = DockStyle.Fill;
+            textBoxTenLop.Enabled = false;
+            textBoxTenLop.Font = new Font("Segoe UI", 12F);
+            textBoxTenLop.Location = new Point(103, 99);
+            textBoxTenLop.Name = "textBoxTenLop";
+            textBoxTenLop.Size = new Size(234, 29);
+            textBoxTenLop.TabIndex = 4;
             // 
-            // textBox3
+            // textBoxKhoaHoc
             // 
-            textBox3.BorderStyle = BorderStyle.FixedSingle;
-            textBox3.Dock = DockStyle.Fill;
-            textBox3.Font = new Font("Segoe UI", 12F);
-            textBox3.Location = new Point(103, 195);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(234, 29);
-            textBox3.TabIndex = 5;
+            textBoxKhoaHoc.BorderStyle = BorderStyle.FixedSingle;
+            textBoxKhoaHoc.Dock = DockStyle.Fill;
+            textBoxKhoaHoc.Enabled = false;
+            textBoxKhoaHoc.Font = new Font("Segoe UI", 12F);
+            textBoxKhoaHoc.Location = new Point(103, 195);
+            textBoxKhoaHoc.Name = "textBoxKhoaHoc";
+            textBoxKhoaHoc.Size = new Size(234, 29);
+            textBoxKhoaHoc.TabIndex = 5;
             // 
-            // dataGridViewMonHoc
+            // dataGridViewMH
             // 
-            dataGridViewMonHoc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewMonHoc.Location = new Point(875, 50);
-            dataGridViewMonHoc.Name = "dataGridViewMonHoc";
-            dataGridViewMonHoc.Size = new Size(450, 330);
-            dataGridViewMonHoc.TabIndex = 0;
+            dataGridViewMH.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewMH.Location = new Point(875, 50);
+            dataGridViewMH.Name = "dataGridViewMH";
+            dataGridViewMH.Size = new Size(450, 330);
+            dataGridViewMH.TabIndex = 0;
             // 
             // UserControlLopHocAdmin
             // 
@@ -257,10 +294,10 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSV).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewMonHoc).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewMH).EndInit();
             ResumeLayout(false);
         }
 
@@ -271,18 +308,22 @@
         private Button buttonSearch;
         private TextBox textBoxSearch;
         private Label label1;
-        private DataGridView dataGridView;
+        public DataGridView dataGridView;
         private Panel panel2;
-        private DataGridView dataGridViewMonHoc;
+        public DataGridView dataGridViewMH;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label2;
         private Label label3;
         private Label label4;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private DataGridView dataGridViewSinhVien;
+        private TextBox textBoxMaLop;
+        private TextBox textBoxTenLop;
+        private TextBox textBoxKhoaHoc;
+        public DataGridView dataGridViewSV;
         private Button buttonThemMH;
         private Button buttonThemSV;
+        private DataGridViewTextBoxColumn MaLop;
+        private DataGridViewTextBoxColumn KhoaHoc;
+        private DataGridViewTextBoxColumn TenLop;
+        private DataGridViewTextBoxColumn SoHS;
     }
 }

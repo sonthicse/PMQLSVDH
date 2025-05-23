@@ -57,9 +57,9 @@ namespace PMQLSVDH
             navigationControl.Display(1);
             navigationButton.Highlight(buttonSinhVien);
 
+            // trực tiếp gọi LoadDataSV mà không qua UserControl
             DatabaseHelper.LoadDataSV(sinhVien.dataGridView);
-
-            // auto-select hàng đầu & hiển thị chi tiết
+            // auto-select hàng đầu
             if (sinhVien.dataGridView.Rows.Count > 0)
             {
                 sinhVien.dataGridView.ClearSelection();
@@ -67,17 +67,29 @@ namespace PMQLSVDH
             }
         }
 
-
         private void buttonGiangVien_Click(object sender, EventArgs e)
         {
             navigationControl.Display(2);
             navigationButton.Highlight(buttonGiangVien);
+
+            // Load toàn bộ giảng viên
+            DatabaseHelper.LoadGiangVien(giangVien.dataGridView);
+
+            // Nếu muốn auto-select hàng đầu
+            if (giangVien.dataGridView.Rows.Count > 0)
+            {
+                giangVien.dataGridView.ClearSelection();
+                giangVien.dataGridView.Rows[0].Selected = true;
+            }
         }
+
 
         private void buttonLopHoc_Click(object sender, EventArgs e)
         {
             navigationControl.Display(3);
             navigationButton.Highlight(buttonLopHoc);
+
+            lopHoc.dataGridView.DataSource = DatabaseHelper.GetClassesOfGV();
         }
 
         private void buttonKhoa_Click(object sender, EventArgs e)

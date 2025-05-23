@@ -16,12 +16,27 @@ namespace PMQLSVDH
         {
             InitializeComponent();
 
-            // chỉ chọn 1 dòng, nguyên hàng
+            // chỉ chọn 1 hàng
             dataGridView.MultiSelect = false;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            // sự kiện chọn sinh viên
             dataGridView.SelectionChanged += DataGridView_SelectionChanged;
+
+            // nút TÌM KIẾM
+            buttonSearch.Click += (_, __) =>
+            {
+                DatabaseHelper.LoadDataSV(dataGridView, textBoxSearch.Text);
+            };
+            textBoxSearch.KeyDown += (_, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                    DatabaseHelper.LoadDataSV(dataGridView, textBoxSearch.Text);
+                }
+            };
+
+            // nạp ban đầu
+            DatabaseHelper.LoadDataSV(dataGridView);
         }
 
 
@@ -67,6 +82,5 @@ namespace PMQLSVDH
 
             comboBoxLop.Text = r["LopHoc"].Value?.ToString() ?? "";
         }
-
     }
 }

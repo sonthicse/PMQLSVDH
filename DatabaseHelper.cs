@@ -12,21 +12,34 @@ namespace PMQLSVDH
         // ────────────────────────────────────────────────
         // 1. Danh sách lớp của giảng viên
         // ────────────────────────────────────────────────
-        public static DataTable GetClassesOfGV(string maGV)
+        public static DataTable GetClassesOfGV(string? maGV = null)
         {
             using var c = new SqliteConnection(Conn);
             c.Open();
-            const string sql = @"SELECT DISTINCT lh.MaLop, lh.TenLop
-                                 FROM GiangDay gd
-                                 JOIN LopHoc lh ON gd.MaLop = lh.MaLop
-                                 WHERE gd.MaGV = @MaGV
-                                 ORDER BY lh.MaLop";
-            using var cmd = new SqliteCommand(sql, c);
-            cmd.Parameters.AddWithValue("@MaGV", maGV);
+
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            sb.AppendLine("  lh.MaLop     AS MaLop,");
+            sb.AppendLine("  lh.TenLop    AS TenLop,");
+            sb.AppendLine("  lh.KhoaHoc   AS KhoaHoc,");      // <- thêm dòng này
+            sb.AppendLine("  COUNT(sv.MaSV) AS SoHS");
+            sb.AppendLine("FROM GiangDay gd");
+            sb.AppendLine("JOIN LopHoc   lh ON gd.MaLop   = lh.MaLop");
+            sb.AppendLine("LEFT JOIN SinhVien sv ON lh.MaLop = sv.MaLop");
+            sb.AppendLine("WHERE (@maGV IS NULL OR gd.MaGV = @maGV)");
+            sb.AppendLine("GROUP BY lh.MaLop, lh.TenLop, lh.KhoaHoc");  // <- thêm KhoaHoc
+            sb.AppendLine("ORDER BY lh.MaLop;");
+
+            using var cmd = new SqliteCommand(sb.ToString(), c);
+            cmd.Parameters.AddWithValue("@maGV",
+                string.IsNullOrWhiteSpace(maGV) ? DBNull.Value : (object)maGV);
+
             var dt = new DataTable();
             dt.Load(cmd.ExecuteReader());
             return dt;
         }
+
+
 
         // ────────────────────────────────────────────────
         // 2. Danh sách sinh viên + điểm
@@ -179,6 +192,58 @@ namespace PMQLSVDH
                 dgv.Columns["Email"].DataPropertyName = "Email";
                 dgv.Columns["LopHoc"].DataPropertyName = "Lớp";
             }
+            dgv.DataSource = dt;
+        }
+
+        // ───────────────────────────────────────────────────────────────────
+        // 4. Danh sách giảng viên
+        // ───────────────────────────────────────────────────────────────────
+        public static void LoadGiangVien(DataGridView dgv, string? kw = null)
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+
+            // 4.1 Xây dựng truy vấn
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT gv.MaGV    AS [Mã GV],");
+            sb.AppendLine("       gv.TenGV   AS [Họ và tên],");
+            sb.AppendLine("       gv.Email   AS [Email],");
+            sb.AppendLine("       mh.TenMH   AS [Môn học],");
+            sb.AppendLine("       k.TenKhoa AS [Khoa]");
+            sb.AppendLine("FROM   GiangVien gv");
+            sb.AppendLine("LEFT   JOIN MonHoc mh ON gv.MaMH    = mh.MaMH");
+            sb.AppendLine("LEFT   JOIN Khoa    k  ON gv.MaKhoa = k.MaKhoa");
+            sb.AppendLine("WHERE 1 = 1");
+            if (!string.IsNullOrWhiteSpace(kw))
+            {
+                sb.AppendLine("  AND (gv.MaGV   LIKE @kw");
+                sb.AppendLine("    OR gv.TenGV  LIKE @kw");
+                sb.AppendLine("    OR gv.Email  LIKE @kw");
+                sb.AppendLine("    OR mh.TenMH  LIKE @kw");
+                sb.AppendLine("    OR k.TenKhoa LIKE @kw)");
+            }
+            sb.AppendLine("ORDER BY gv.MaGV");
+
+            // 4.2 Thực thi
+            using var cmd = new SqliteCommand(sb.ToString(), c);
+            if (!string.IsNullOrWhiteSpace(kw))
+                cmd.Parameters.AddWithValue("@kw", $"%{kw.Trim()}%");
+
+            var dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+
+            // 4.3 Ánh xạ cột (chỉ chạy 1 lần)
+            if (dgv.Columns["MaGV"].DataPropertyName == "")
+            {
+                dgv.AutoGenerateColumns = false;
+                dgv.Columns["MaGV"].DataPropertyName = "Mã GV";
+                dgv.Columns["TenGV"].DataPropertyName = "Họ và tên";
+                dgv.Columns["Email"].DataPropertyName = "Email";
+                dgv.Columns["MonHoc"].DataPropertyName = "Môn học";
+                dgv.Columns["Khoa"].DataPropertyName = "Khoa";
+            }
+
+            // 4.4 Gán nguồn dữ liệu
             dgv.DataSource = dt;
         }
 
