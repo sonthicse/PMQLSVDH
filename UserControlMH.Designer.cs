@@ -1,6 +1,6 @@
 ﻿namespace PMQLSVDH
 {
-    partial class UserControlGiangVien
+    partial class UserControlMH
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             panel1 = new Panel();
             label7 = new Label();
             buttonThem = new Button();
@@ -81,7 +81,7 @@
             panel1.Location = new Point(20, 20);
             panel1.Name = "panel1";
             panel1.Size = new Size(1344, 400);
-            panel1.TabIndex = 2;
+            panel1.TabIndex = 3;
             // 
             // label7
             // 
@@ -89,9 +89,9 @@
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label7.Location = new Point(300, 15);
             label7.Name = "label7";
-            label7.Size = new Size(201, 21);
+            label7.Size = new Size(186, 21);
             label7.TabIndex = 5;
-            label7.Text = "DANH SÁCH GIẢNG VIÊN";
+            label7.Text = "DANH SÁCH MÔN HỌC";
             // 
             // buttonThem
             // 
@@ -139,24 +139,24 @@
             dataGridView.AllowUserToOrderColumns = true;
             dataGridView.AllowUserToResizeColumns = false;
             dataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Columns.AddRange(new DataGridViewColumn[] { MaGV, TenGV, Email, MonHoc, Khoa });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView.Location = new Point(300, 50);
             dataGridView.MultiSelect = false;
             dataGridView.Name = "dataGridView";
@@ -208,7 +208,7 @@
             panel2.Location = new Point(20, 440);
             panel2.Name = "panel2";
             panel2.Size = new Size(1344, 400);
-            panel2.TabIndex = 3;
+            panel2.TabIndex = 4;
             // 
             // label8
             // 
@@ -216,9 +216,9 @@
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label8.Location = new Point(463, 19);
             label8.Name = "label8";
-            label8.Size = new Size(175, 21);
+            label8.Size = new Size(226, 21);
             label8.TabIndex = 8;
-            label8.Text = "DANH SÁCH LỚP DẠY";
+            label8.Text = "DANH SÁCH GIÁO VIÊN DẠY";
             // 
             // buttonSua
             // 
@@ -229,7 +229,6 @@
             buttonSua.TabIndex = 7;
             buttonSua.Text = "SỬA";
             buttonSua.UseVisualStyleBackColor = true;
-            buttonSua.Click += buttonSua_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -400,7 +399,6 @@
             buttonHuy.Text = "HỦY";
             buttonHuy.UseVisualStyleBackColor = true;
             buttonHuy.Visible = false;
-            buttonHuy.Click += buttonHuy_Click;
             // 
             // buttonXN
             // 
@@ -412,15 +410,14 @@
             buttonXN.Text = "XÁC NHẬN";
             buttonXN.UseVisualStyleBackColor = true;
             buttonXN.Visible = false;
-            buttonXN.Click += buttonXN_Click;
             // 
-            // UserControlGiangVien
+            // UserControlMH
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "UserControlGiangVien";
+            Name = "UserControlMH";
             Size = new Size(1384, 861);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -436,14 +433,20 @@
         #endregion
 
         private Panel panel1;
+        private Label label7;
         private Button buttonThem;
         private Button buttonSearch;
         private TextBox textBoxSearch;
         private Label label1;
+        public DataGridView dataGridView;
+        private DataGridViewTextBoxColumn MaGV;
+        private DataGridViewTextBoxColumn TenGV;
+        private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn MonHoc;
+        private DataGridViewTextBoxColumn Khoa;
         private Panel panel2;
-        private Button buttonThemMH;
-        private Button buttonThemSV;
-        private DataGridView dataGridViewSinhVien;
+        private Label label8;
+        private Button buttonSua;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label2;
         private Label label3;
@@ -451,23 +454,14 @@
         private TextBox textBoxMaGV;
         private TextBox textBoxTenGV;
         private TextBox textBoxEmail;
-        private DataGridView dataGridViewLopHoc;
         private Label label5;
-        private DataGridViewTextBoxColumn MaGV;
-        private DataGridViewTextBoxColumn TenGV;
-        private DataGridViewTextBoxColumn Email;
-        private DataGridViewTextBoxColumn MonHoc;
-        private DataGridViewTextBoxColumn Khoa;
-        public DataGridView dataGridView;
-        private Button buttonSua;
         private Label label6;
         private ComboBox comboBoxMH;
         private ComboBox comboBoxKhoa;
+        private DataGridView dataGridViewLopHoc;
         private DataGridViewTextBoxColumn MaLop;
         private DataGridViewTextBoxColumn TenLop;
         private DataGridViewTextBoxColumn SoHS;
-        private Label label7;
-        private Label label8;
         private Button buttonHuy;
         private Button buttonXN;
     }

@@ -37,7 +37,7 @@
             buttonGiangVien = new Button();
             buttonLopHoc = new Button();
             buttonKhoa = new Button();
-            buttonTaiKhoan = new Button();
+            buttonMH = new Button();
             panel = new Panel();
             panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).BeginInit();
@@ -51,6 +51,7 @@
             panelMenu.Controls.Add(buttonDangXuat);
             panelMenu.Controls.Add(tableLayoutPanel);
             panelMenu.Dock = DockStyle.Left;
+            panelMenu.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             panelMenu.Location = new Point(0, 0);
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(200, 861);
@@ -87,7 +88,7 @@
             tableLayoutPanel.Controls.Add(buttonGiangVien, 0, 2);
             tableLayoutPanel.Controls.Add(buttonLopHoc, 0, 3);
             tableLayoutPanel.Controls.Add(buttonKhoa, 0, 4);
-            tableLayoutPanel.Controls.Add(buttonTaiKhoan, 0, 5);
+            tableLayoutPanel.Controls.Add(buttonMH, 0, 5);
             tableLayoutPanel.Location = new Point(0, 200);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.RowCount = 6;
@@ -155,16 +156,16 @@
             buttonKhoa.UseVisualStyleBackColor = true;
             buttonKhoa.Click += buttonKhoa_Click;
             // 
-            // buttonTaiKhoan
+            // buttonMH
             // 
-            buttonTaiKhoan.Dock = DockStyle.Fill;
-            buttonTaiKhoan.Location = new Point(3, 328);
-            buttonTaiKhoan.Name = "buttonTaiKhoan";
-            buttonTaiKhoan.Size = new Size(194, 60);
-            buttonTaiKhoan.TabIndex = 5;
-            buttonTaiKhoan.Text = "TaiKhoan";
-            buttonTaiKhoan.UseVisualStyleBackColor = true;
-            buttonTaiKhoan.Click += buttonTaiKhoan_Click;
+            buttonMH.Dock = DockStyle.Fill;
+            buttonMH.Location = new Point(3, 328);
+            buttonMH.Name = "buttonMH";
+            buttonMH.Size = new Size(194, 60);
+            buttonMH.TabIndex = 5;
+            buttonMH.Text = "MÔN HỌC";
+            buttonMH.UseVisualStyleBackColor = true;
+            buttonMH.Click += buttonTaiKhoan_Click;
             // 
             // panel
             // 
@@ -203,7 +204,7 @@
         private Button buttonGiangVien;
         private Button buttonLopHoc;
         private Button buttonKhoa;
-        private Button buttonTaiKhoan;
+        private Button buttonMH;
         private Panel panel;
     }
 }

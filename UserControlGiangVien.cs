@@ -12,6 +12,7 @@ namespace PMQLSVDH
 {
     public partial class UserControlGiangVien : UserControl
     {
+        private DataTable dtMonHoc;
         public UserControlGiangVien()
         {
             InitializeComponent();
@@ -29,8 +30,27 @@ namespace PMQLSVDH
                 DatabaseHelper.LoadGiangVien(dataGridView, textBoxSearch.Text);
             };
 
-            // Load dữ liệu mặc định khi khởi tạo
             DatabaseHelper.LoadGiangVien(dataGridView, null);
+
+            var dtKhoa = DatabaseHelper.GetAllKhoa();
+            comboBoxKhoa.DataSource = dtKhoa;
+            comboBoxKhoa.DisplayMember = "TenKhoa";
+            comboBoxKhoa.ValueMember = "MaKhoa";
+
+            // 2. Load toàn bộ môn học
+            dtMonHoc = DatabaseHelper.GetAllMonHoc();
+            comboBoxMH.DataSource = dtMonHoc;
+            comboBoxMH.DisplayMember = "TenMH";
+            comboBoxMH.ValueMember = "MaMH";
+
+            // 3. Khi đổi khoa thì filter môn
+            comboBoxKhoa.SelectedIndexChanged += (s, e) =>
+            {
+                var maKhoa = comboBoxKhoa.SelectedValue?.ToString() ?? "";
+                var dv = dtMonHoc.DefaultView;
+                dv.RowFilter = $"MaKhoa = '{maKhoa}'";
+                comboBoxMH.DataSource = dv;
+            };
         }
 
         private void DataGridView_SelectionChanged(object? sender, EventArgs e)
@@ -41,22 +61,18 @@ namespace PMQLSVDH
             var row = dataGridView.SelectedRows[0];
             var maGV = row.Cells["MaGV"].Value?.ToString() ?? "";
 
-            // 1. Đổ thông tin giảng viên xuống các TextBox/ComboBox
             textBoxMaGV.Text = maGV;
             textBoxTenGV.Text = row.Cells["TenGV"].Value?.ToString() ?? "";
             textBoxEmail.Text = row.Cells["Email"].Value?.ToString() ?? "";
             comboBoxMH.Text = row.Cells["MonHoc"].Value?.ToString() ?? "";
             comboBoxKhoa.Text = row.Cells["Khoa"].Value?.ToString() ?? "";
 
-            // 2. Lấy danh sách lớp của giảng viên này
             var dtLop = DatabaseHelper.GetClassesOfGV(maGV);
 
-            // 3. Ánh xạ cột (nếu cần chỉ làm 1 lần)
             if (dataGridViewLopHoc.Columns.Count > 0 && dataGridViewLopHoc.Columns["MaLop"].DataPropertyName == "")
             {
                 dataGridViewLopHoc.AutoGenerateColumns = false;
 
-                // Giả sử bạn đã thêm hai cột trong Designer với Name = "MaLop" và "TenLop"
                 dataGridViewLopHoc.Columns["MaLop"].DataPropertyName = "MaLop";
                 dataGridViewLopHoc.Columns["TenLop"].DataPropertyName = "TenLop";
                 dataGridViewLopHoc.Columns["SoHS"].DataPropertyName = "SoHS";
@@ -66,6 +82,50 @@ namespace PMQLSVDH
             dataGridViewLopHoc.DataSource = dtLop;
         }
 
+        private void buttonSua_Click(object sender, EventArgs e)
+        {
+            textBoxTenGV.Enabled = true;
+            textBoxEmail.Enabled = true;
+            buttonHuy.Visible = true;
+            buttonXN.Visible = true;
+            buttonSua.Visible = false;
+        }
 
+        private void buttonHuy_Click(object sender, EventArgs e)
+        {
+            buttonSua.Visible = true;
+            buttonXN.Visible = false;
+            buttonHuy.Visible = false;
+            textBoxTenGV.Enabled = false;
+            textBoxEmail.Enabled = false;
+            DatabaseHelper.LoadGiangVien(dataGridView, null);
+        }
+
+        private void buttonXN_Click(object sender, EventArgs e)
+        {
+            var maGV = textBoxMaGV.Text.Trim();          // MaGV đang KHÔNG cho sửa
+            var tenGV = textBoxTenGV.Text.Trim();
+            var email = textBoxEmail.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(tenGV) || string.IsNullOrWhiteSpace(email))
+            {
+                MessageBox.Show("Tên và Email không được để trống!");
+                return;
+            }
+
+            var ok = DatabaseHelper.UpdateGiangVienInfo(maGV, tenGV, email);
+            MessageBox.Show(ok ? "Đã cập nhật!" : "Không tìm thấy giảng viên.",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            ok ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+
+            if (ok) DatabaseHelper.LoadGiangVien(dataGridView);
+
+            buttonSua.Visible = true;
+            buttonXN.Visible = false;
+            buttonHuy.Visible = false;
+            textBoxTenGV.Enabled = false;
+            textBoxEmail.Enabled = false;
+        }
     }
 }

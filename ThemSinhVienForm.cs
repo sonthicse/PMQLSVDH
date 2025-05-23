@@ -31,14 +31,26 @@ namespace PMQLSVDH
 
         private void buttonXacNhan_Click(object sender, EventArgs e)
         {
-            // Corrected the MessageBox usage to use MessageBox.Show method
-            DialogResult result = MessageBox.Show("Xác nhận thêm Sinh Viên vào?????", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            var sv = new SinhVien
             {
-                // TaTho
-            }
+                MaSV = textBoxMaSV.Text.Trim(),
+                TenSV = textBoxTenSV.Text.Trim(),
+                NgaySinh = dateTimePickerNgaySinh.Value.ToString("yyyy-MM-dd"),
+                GioiTinh = radioButtonNam.Checked ? "Nam" : "Nữ",
+                DiaChi = textBoxDiaChi.Text.Trim(),
+                SDT = textBoxSDT.Text.Trim(),
+                Email = textBoxEmail.Text.Trim(),
+                MaLop = comboBoxLop.SelectedValue?.ToString()
+            };
+
+            var ok = DatabaseHelper.InsertSinhVien(sv);
+            MessageBox.Show(ok ? "Thêm thành công!" : "Mã sinh viên đã tồn tại.",
+                            "Thông báo", MessageBoxButtons.OK,
+                            ok ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
+
+            if (ok) Close();    // đóng form khi thêm xong
         }
+
 
         private void buttonHuy_Click(object sender, EventArgs e)
         {

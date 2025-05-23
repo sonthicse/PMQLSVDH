@@ -247,5 +247,171 @@ namespace PMQLSVDH
             dgv.DataSource = dt;
         }
 
+        public static DataTable GetAllKhoa()
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+            using var cmd = new SqliteCommand("SELECT MaKhoa, TenKhoa FROM Khoa ORDER BY TenKhoa", c);
+            var dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+            return dt;
+        }
+
+        public static DataTable GetAllMonHoc()
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+            using var cmd = new SqliteCommand("SELECT MaMH, TenMH, MaKhoa FROM MonHoc ORDER BY TenMH", c);
+            var dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+            return dt;
+        }
+
+        public static bool InsertSinhVien(SinhVien sv)
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+
+            // 1. Tránh trùng khóa chính
+            const string chk = "SELECT COUNT(1) FROM SinhVien WHERE MaSV = @MaSV";
+            using (var cmdChk = new SqliteCommand(chk, c))
+            {
+                cmdChk.Parameters.AddWithValue("@MaSV", sv.MaSV);
+                if ((long)cmdChk.ExecuteScalar() > 0) return false;   // đã tồn tại
+            }
+
+            // 2. Insert
+            const string ins = @"
+INSERT INTO SinhVien (MaSV, TenSV, NgaySinh, GioiTinh, DiaChi, SDT, Email, MaLop)
+VALUES (@MaSV,@TenSV,@NS,@GT,@DC,@SDT,@Email,@MaLop)";
+            using var cmd = new SqliteCommand(ins, c);
+            cmd.Parameters.AddWithValue("@MaSV", sv.MaSV);
+            cmd.Parameters.AddWithValue("@TenSV", sv.TenSV);
+            cmd.Parameters.AddWithValue("@NS", sv.NgaySinh);
+            cmd.Parameters.AddWithValue("@GT", sv.GioiTinh);
+            cmd.Parameters.AddWithValue("@DC", sv.DiaChi);
+            cmd.Parameters.AddWithValue("@SDT", sv.SDT);
+            cmd.Parameters.AddWithValue("@Email", sv.Email);
+            cmd.Parameters.AddWithValue("@MaLop", sv.MaLop);
+            cmd.ExecuteNonQuery();
+            return true;
+        }
+
+        public static bool UpdateSinhVien(SinhVien sv, string oldMaSV)
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+            using var tx = c.BeginTransaction();
+
+            // ───────────────────────────────────────────
+            // 1. Nếu đổi sang MaSV mới → kiểm tra trùng
+            // ───────────────────────────────────────────
+            if (!sv.MaSV.Equals(oldMaSV, StringComparison.OrdinalIgnoreCase))
+            {
+                const string sqlChk = "SELECT 1 FROM SinhVien WHERE MaSV = @NewID LIMIT 1";
+                using var cmdChk = new SqliteCommand(sqlChk, c, tx);
+                cmdChk.Parameters.AddWithValue("@NewID", sv.MaSV);
+                if (cmdChk.ExecuteScalar() != null)    // đã có mã mới
+                {
+                    tx.Rollback();
+                    return false;
+                }
+            }
+
+            // ───────────────────────────────────────────
+            // 2. Cập nhật bảng SinhVien
+            // ───────────────────────────────────────────
+            const string sqlSV = @"
+UPDATE SinhVien SET
+    MaSV     = @NewID,
+    TenSV    = @TenSV,
+    NgaySinh = @NgaySinh,
+    GioiTinh = @GioiTinh,
+    DiaChi   = @DiaChi,
+    SDT      = @SDT,
+    Email    = @Email,
+    MaLop    = @MaLop
+WHERE MaSV   = @OldID;";
+            using var cmdSV = new SqliteCommand(sqlSV, c, tx);
+            cmdSV.Parameters.AddWithValue("@NewID", sv.MaSV);
+            cmdSV.Parameters.AddWithValue("@TenSV", sv.TenSV);
+            cmdSV.Parameters.AddWithValue("@NgaySinh", sv.NgaySinh);
+            cmdSV.Parameters.AddWithValue("@GioiTinh", sv.GioiTinh);
+            cmdSV.Parameters.AddWithValue("@DiaChi", sv.DiaChi);
+            cmdSV.Parameters.AddWithValue("@SDT", sv.SDT);
+            cmdSV.Parameters.AddWithValue("@Email", sv.Email);
+            cmdSV.Parameters.AddWithValue("@MaLop", sv.MaLop);
+            cmdSV.Parameters.AddWithValue("@OldID", oldMaSV);
+
+            if (cmdSV.ExecuteNonQuery() != 1)
+            {
+                tx.Rollback();
+                return false;           // không tìm thấy SV cũ
+            }
+
+            // ───────────────────────────────────────────
+            // 3. (Tuỳ chọn) đồng bộ các bảng phụ
+            // ───────────────────────────────────────────
+            const string sqlDiem = "UPDATE Diem SET MaSV = @NewID WHERE MaSV = @OldID;";
+            using var cmdD = new SqliteCommand(sqlDiem, c, tx);
+            cmdD.Parameters.AddWithValue("@NewID", sv.MaSV);
+            cmdD.Parameters.AddWithValue("@OldID", oldMaSV);
+            cmdD.ExecuteNonQuery();     // có thể 0 hàng nếu SV chưa có điểm
+
+            tx.Commit();
+            return true;
+        }
+
+        public static bool DeleteSinhVien(string maSV)
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+            using var tx = c.BeginTransaction();
+
+            // 1. Xóa điểm của SV (nếu có)
+            const string sqlDiem = "DELETE FROM Diem WHERE MaSV = @MaSV";
+            using (var cmd = new SqliteCommand(sqlDiem, c, tx))
+            {
+                cmd.Parameters.AddWithValue("@MaSV", maSV);
+                cmd.ExecuteNonQuery();            // có thể 0–n dòng
+            }
+
+            // 2. Xóa sinh viên
+            const string sqlSV = "DELETE FROM SinhVien WHERE MaSV = @MaSV";
+            using (var cmd = new SqliteCommand(sqlSV, c, tx))
+            {
+                cmd.Parameters.AddWithValue("@MaSV", maSV);
+                var affected = cmd.ExecuteNonQuery();  // 1 nếu tồn tại, 0 nếu không
+                if (affected != 1)
+                {
+                    tx.Rollback();
+                    return false;               // không tìm thấy SV
+                }
+            }
+
+            tx.Commit();
+            return true;
+        }
+
+        // DatabaseHelper.cs
+        public static bool UpdateGiangVienInfo(string maGV, string tenGV, string email)
+        {
+            using var c = new SqliteConnection(Conn);          // Conn = "Data Source=PMQLSVDH_v2.db;"
+            c.Open();
+
+            const string sql = @"
+        UPDATE GiangVien
+        SET    TenGV = @TenGV,
+               Email = @Email
+        WHERE  MaGV  = @MaGV;";
+
+            using var cmd = new SqliteCommand(sql, c);
+            cmd.Parameters.AddWithValue("@TenGV", tenGV);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@MaGV", maGV);
+
+            return cmd.ExecuteNonQuery() == 1;   // trả về true nếu sửa đúng 1 dòng
+        }
+
     }
 }

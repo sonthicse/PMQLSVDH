@@ -40,10 +40,12 @@
             TenLop = new DataGridViewTextBoxColumn();
             SoHS = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
+            buttonSua = new Button();
+            buttonHuy = new Button();
+            buttonXN = new Button();
             label7 = new Label();
             label6 = new Label();
             buttonThemMH = new Button();
-            buttonThemSV = new Button();
             dataGridViewSV = new DataGridView();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -166,10 +168,12 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLightLight;
+            panel2.Controls.Add(buttonSua);
+            panel2.Controls.Add(buttonHuy);
+            panel2.Controls.Add(buttonXN);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(buttonThemMH);
-            panel2.Controls.Add(buttonThemSV);
             panel2.Controls.Add(dataGridViewSV);
             panel2.Controls.Add(tableLayoutPanel1);
             panel2.Controls.Add(dataGridViewMH);
@@ -178,6 +182,41 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1344, 400);
             panel2.TabIndex = 2;
+            // 
+            // buttonSua
+            // 
+            buttonSua.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonSua.Location = new Point(260, 256);
+            buttonSua.Name = "buttonSua";
+            buttonSua.Size = new Size(100, 30);
+            buttonSua.TabIndex = 11;
+            buttonSua.Text = "SỬA";
+            buttonSua.UseVisualStyleBackColor = true;
+            buttonSua.Click += buttonSua_Click;
+            // 
+            // buttonHuy
+            // 
+            buttonHuy.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonHuy.Location = new Point(114, 256);
+            buttonHuy.Name = "buttonHuy";
+            buttonHuy.Size = new Size(120, 30);
+            buttonHuy.TabIndex = 10;
+            buttonHuy.Text = "HỦY";
+            buttonHuy.UseVisualStyleBackColor = true;
+            buttonHuy.Visible = false;
+            buttonHuy.Click += buttonHuy_Click;
+            // 
+            // buttonXN
+            // 
+            buttonXN.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonXN.Location = new Point(240, 256);
+            buttonXN.Name = "buttonXN";
+            buttonXN.Size = new Size(120, 30);
+            buttonXN.TabIndex = 9;
+            buttonXN.Text = "XÁC NHẬN";
+            buttonXN.UseVisualStyleBackColor = true;
+            buttonXN.Visible = false;
+            buttonXN.Click += buttonXN_Click;
             // 
             // label7
             // 
@@ -209,17 +248,6 @@
             buttonThemMH.Text = "THÊM";
             buttonThemMH.UseVisualStyleBackColor = true;
             // 
-            // buttonThemSV
-            // 
-            buttonThemSV.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            buttonThemSV.Location = new Point(780, 10);
-            buttonThemSV.Name = "buttonThemSV";
-            buttonThemSV.Size = new Size(75, 30);
-            buttonThemSV.TabIndex = 5;
-            buttonThemSV.Text = "THÊM";
-            buttonThemSV.UseVisualStyleBackColor = true;
-            buttonThemSV.Click += buttonThemSV_Click;
-            // 
             // dataGridViewSV
             // 
             dataGridViewSV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -239,13 +267,13 @@
             tableLayoutPanel1.Controls.Add(textBoxMaLop, 1, 0);
             tableLayoutPanel1.Controls.Add(textBoxTenLop, 1, 1);
             tableLayoutPanel1.Controls.Add(textBoxKhoaHoc, 1, 2);
-            tableLayoutPanel1.Location = new Point(20, 20);
+            tableLayoutPanel1.Location = new Point(20, 50);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Size = new Size(340, 288);
+            tableLayoutPanel1.Size = new Size(340, 200);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // label2
@@ -262,7 +290,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(3, 96);
+            label3.Location = new Point(3, 66);
             label3.Name = "label3";
             label3.Size = new Size(67, 21);
             label3.TabIndex = 1;
@@ -272,7 +300,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(3, 192);
+            label4.Location = new Point(3, 132);
             label4.Name = "label4";
             label4.Size = new Size(77, 21);
             label4.TabIndex = 2;
@@ -295,7 +323,7 @@
             textBoxTenLop.Dock = DockStyle.Fill;
             textBoxTenLop.Enabled = false;
             textBoxTenLop.Font = new Font("Segoe UI", 12F);
-            textBoxTenLop.Location = new Point(103, 99);
+            textBoxTenLop.Location = new Point(103, 69);
             textBoxTenLop.Name = "textBoxTenLop";
             textBoxTenLop.Size = new Size(234, 29);
             textBoxTenLop.TabIndex = 4;
@@ -306,7 +334,7 @@
             textBoxKhoaHoc.Dock = DockStyle.Fill;
             textBoxKhoaHoc.Enabled = false;
             textBoxKhoaHoc.Font = new Font("Segoe UI", 12F);
-            textBoxKhoaHoc.Location = new Point(103, 195);
+            textBoxKhoaHoc.Location = new Point(103, 135);
             textBoxKhoaHoc.Name = "textBoxKhoaHoc";
             textBoxKhoaHoc.Size = new Size(234, 29);
             textBoxKhoaHoc.TabIndex = 5;
@@ -358,7 +386,6 @@
         private TextBox textBoxKhoaHoc;
         public DataGridView dataGridViewSV;
         private Button buttonThemMH;
-        private Button buttonThemSV;
         private DataGridViewTextBoxColumn MaLop;
         private DataGridViewTextBoxColumn KhoaHoc;
         private DataGridViewTextBoxColumn TenLop;
@@ -366,5 +393,8 @@
         private Label label5;
         private Label label7;
         private Label label6;
+        private Button buttonSua;
+        private Button buttonHuy;
+        private Button buttonXN;
     }
 }

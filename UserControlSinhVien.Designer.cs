@@ -260,6 +260,7 @@ namespace PMQLSVDH
             buttonXoa.TabIndex = 1;
             buttonXoa.Text = "XÓA";
             buttonXoa.UseVisualStyleBackColor = true;
+            buttonXoa.Click += buttonXoa_Click;
             // 
             // buttonHuy
             // 

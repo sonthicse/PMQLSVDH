@@ -41,7 +41,7 @@ namespace PMQLSVDH
 
         private void InitializeNavigationButton()
         {
-            List<Button> buttons = new List<Button>() { buttonTrangChu, buttonSinhVien, buttonGiangVien, buttonLopHoc, buttonKhoa, buttonTaiKhoan };
+            List<Button> buttons = new List<Button>() { buttonTrangChu, buttonSinhVien, buttonGiangVien, buttonLopHoc, buttonKhoa, buttonMH };
             navigationButton = new NavigationButton(buttons, btnDefaultColor, btnSelectedColor);
             navigationButton.Highlight(buttonTrangChu);
         }
@@ -101,7 +101,7 @@ namespace PMQLSVDH
         private void buttonTaiKhoan_Click(object sender, EventArgs e)
         {
             navigationControl.Display(5);
-            navigationButton.Highlight(buttonTaiKhoan);
+            navigationButton.Highlight(buttonMH);
         }
 
         private void buttonDangXuat_Click(object sender, EventArgs e)

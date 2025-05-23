@@ -37,5 +37,31 @@ namespace PMQLSVDH
             textBoxTenLop.Text = row.Cells["TenLop"].Value?.ToString() ?? "";
             textBoxKhoaHoc.Text = row.Cells["KhoaHoc"].Value?.ToString() ?? "";
         }
+
+        private void buttonSua_Click(object sender, EventArgs e)
+        {
+            buttonXN.Visible = true;
+            buttonHuy.Visible = true;
+            buttonSua.Visible = false;
+            textBoxMaLop.Enabled = true;
+            textBoxTenLop.Enabled = true;
+            textBoxKhoaHoc.Enabled = true;
+        }
+
+        private void buttonHuy_Click(object sender, EventArgs e)
+        {
+            buttonXN.Visible = false;
+            buttonHuy.Visible = false;
+            buttonSua.Visible = true;
+            textBoxMaLop.Enabled = false;
+            textBoxTenLop.Enabled = false;
+            textBoxKhoaHoc.Enabled = false;
+            dataGridView.DataSource = DatabaseHelper.GetClassesOfGV();
+        }
+
+        private void buttonXN_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

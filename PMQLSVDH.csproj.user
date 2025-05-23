@@ -4,6 +4,9 @@
     <Compile Update="AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ThemGiangVienForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="GiangVienForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -26,6 +29,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserControlLopHocAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControlMH.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserControlSinhVien.cs">
