@@ -127,5 +127,11 @@ namespace PMQLSVDH
             textBoxTenGV.Enabled = false;
             textBoxEmail.Enabled = false;
         }
+
+        private void buttonThem_Click(object sender, EventArgs e)
+        {
+            ThemGiangVienForm themGV = new ThemGiangVienForm();
+            themGV.ShowDialog();
+        }
     }
 }

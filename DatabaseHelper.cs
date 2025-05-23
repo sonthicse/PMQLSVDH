@@ -413,5 +413,31 @@ WHERE MaSV   = @OldID;";
             return cmd.ExecuteNonQuery() == 1;   // trả về true nếu sửa đúng 1 dòng
         }
 
+        public static bool InsertGiangVien(GiangVien gv)
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+
+            // 1. Không cho trùng mã
+            const string chk = "SELECT 1 FROM GiangVien WHERE MaGV = @MaGV LIMIT 1";
+            using (var cmdChk = new SqliteCommand(chk, c))
+            {
+                cmdChk.Parameters.AddWithValue("@MaGV", gv.MaGV);
+                if (cmdChk.ExecuteScalar() != null) return false;     // đã tồn tại
+            }
+
+            // 2. Thêm mới
+            const string ins = @"
+INSERT INTO GiangVien (MaGV, TenGV, Email, MaKhoa, MaMH)
+VALUES (@MaGV,@TenGV,@Email,@MaKhoa,@MaMH);";
+            using var cmd = new SqliteCommand(ins, c);
+            cmd.Parameters.AddWithValue("@MaGV", gv.MaGV);
+            cmd.Parameters.AddWithValue("@TenGV", gv.TenGV);
+            cmd.Parameters.AddWithValue("@Email", gv.Email);
+            cmd.Parameters.AddWithValue("@MaKhoa", gv.MaKhoa);
+            cmd.Parameters.AddWithValue("@MaMH", gv.MaMH);
+            cmd.ExecuteNonQuery();
+            return true;
+        }
     }
 }

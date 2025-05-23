@@ -44,7 +44,7 @@ namespace PMQLSVDH
         public string? TenGV { get; set; }
         public string? Email { get; set; }
         public string? MaKhoa { get; set; }
-        public List<LopHoc>? lopHocs { get; set; } = new();
+        public string? MaMH { get; set; }
     }
 
     public class Diem
