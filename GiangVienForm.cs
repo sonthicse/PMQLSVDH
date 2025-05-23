@@ -7,59 +7,49 @@ namespace PMQLSVDH
 {
     public partial class GiangVienForm : Form
     {
-        private NavigationControl navigationControl;
-        private NavigationButton navigationButton;
-        private UserControlTrangChu trangChu;
-        private UserControlLopHoc lopHoc;
-        private UserControlCaiDat caiDat;
-        private GiangVien giangVien;
-
-        private readonly Color btnDefaultColor = Color.FromKnownColor(KnownColor.ControlLight);
-        private readonly Color btnSelectedColor = Color.FromKnownColor(KnownColor.ControlDark);
+        private readonly Color _def = Color.FromKnownColor(KnownColor.ControlLight);
+        private readonly Color _sel = Color.FromKnownColor(KnownColor.ControlDark);
+        private NavigationControl navCtrl;
+        private NavigationButton navBtn;
+        private UserControlTrangChu ucTrangChu;
+        private UserControlLopHoc ucLopHoc;
+        private UserControlCaiDat ucCaiDat;
 
         public GiangVienForm()
         {
-            giangVien = DatabaseHelper.LoadGiangVienTree("GV001");
             InitializeComponent();
-            InitializeNavigationButton();
-            InitializeNavigationControl();
+            InitNavigation();
         }
 
-        private void InitializeNavigationControl()
+        private void InitNavigation()
         {
-            trangChu = new UserControlTrangChu();
-            lopHoc = new UserControlLopHoc();
-            caiDat = new UserControlCaiDat();
+            ucTrangChu = new UserControlTrangChu();
+            ucLopHoc = new UserControlLopHoc();
+            ucCaiDat = new UserControlCaiDat();
 
-            var controls = new List<UserControl> { trangChu, lopHoc, caiDat };
-            navigationControl = new NavigationControl(controls, panel);
-            navigationControl.Display(0);
-        }
-
-        private void InitializeNavigationButton()
-        {
-            var buttons = new List<Button> { buttonTrangChu, buttonLopHoc, buttonCaiDat };
-            navigationButton = new NavigationButton(buttons, btnDefaultColor, btnSelectedColor);
-            navigationButton.Highlight(buttonTrangChu);
+            navCtrl = new NavigationControl(new List<UserControl> { ucTrangChu, ucLopHoc, ucCaiDat }, panel);
+            navBtn = new NavigationButton(new List<Button> { buttonTrangChu, buttonLopHoc, buttonCaiDat }, _def, _sel);
+            navCtrl.Display(0);
+            navBtn.Highlight(buttonTrangChu);
         }
 
         private void buttonTrangChu_Click(object sender, EventArgs e)
         {
-            navigationControl.Display(0);
-            navigationButton.Highlight(buttonTrangChu);
+            navCtrl.Display(0);
+            navBtn.Highlight(buttonTrangChu);
         }
 
         private void buttonLopHoc_Click(object sender, EventArgs e)
         {
-            navigationControl.Display(1);
-            navigationButton.Highlight(buttonLopHoc);
-            UserControlLopHoc.LoadAllStudents(lopHoc.dataGridView, giangVien); // bỏ lọc cứng "L001"
+            navCtrl.Display(1);
+            navBtn.Highlight(buttonLopHoc);
+            ucLopHoc.InitForGiangVien("GV001"); // TODO: lấy MaGV theo đăng nhập
         }
 
         private void buttonCaiDat_Click(object sender, EventArgs e)
         {
-            navigationControl.Display(2);
-            navigationButton.Highlight(buttonCaiDat);
+            navCtrl.Display(2);
+            navBtn.Highlight(buttonCaiDat);
         }
 
         private void buttonDangXuat_Click(object sender, EventArgs e) => Close();

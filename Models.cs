@@ -1,8 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PMQLSVDH
 {
+    // ─────────────── Thực thể DB tương đương bảng ───────────────
+    public class Khoa
+    {
+        public string? MaKhoa { get; set; }
+        public string? TenKhoa { get; set; }
+    }
+
+    public class LopHoc
+    {
+        public string? MaLop { get; set; }
+        public string? TenLop { get; set; }
+        public string? KhoaHoc { get; set; }
+        public List<SinhVien>? sinhViens { get; set; } = new();
+    }
+
     public class SinhVien
     {
         public string? MaSV { get; set; }
@@ -14,20 +28,6 @@ namespace PMQLSVDH
         public string? Email { get; set; }
         public string? MaLop { get; set; }
         public List<Diem>? diem { get; set; } = new();
-    }
-
-    public class LopHoc
-    {
-        public string? MaLop { get; set; }
-        public string? TenLop { get; set; }
-        public string? KhoaHoc { get; set; }
-        public List<SinhVien>? sinhViens { get; set; } = new();
-    }
-
-    public class Khoa
-    {
-        public string? MaKhoa { get; set; }
-        public string? TenKhoa { get; set; }
     }
 
     public class MonHoc
@@ -44,7 +44,6 @@ namespace PMQLSVDH
         public string? TenGV { get; set; }
         public string? Email { get; set; }
         public string? MaKhoa { get; set; }
-        public string? MaMH { get; set; }
         public List<LopHoc>? lopHocs { get; set; } = new();
     }
 
