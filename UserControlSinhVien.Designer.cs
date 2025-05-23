@@ -31,8 +31,11 @@ namespace PMQLSVDH
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
             buttonThem = new Button();
+            label4 = new Label();
             buttonSearch = new Button();
             textBoxSearch = new TextBox();
             label1 = new Label();
@@ -80,6 +83,7 @@ namespace PMQLSVDH
             // 
             panel1.BackColor = SystemColors.ControlLightLight;
             panel1.Controls.Add(buttonThem);
+            panel1.Controls.Add(label4);
             panel1.Controls.Add(buttonSearch);
             panel1.Controls.Add(textBoxSearch);
             panel1.Controls.Add(label1);
@@ -92,13 +96,23 @@ namespace PMQLSVDH
             // buttonThem
             // 
             buttonThem.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            buttonThem.Location = new Point(1221, 14);
+            buttonThem.Location = new Point(1250, 10);
             buttonThem.Name = "buttonThem";
-            buttonThem.Size = new Size(100, 30);
-            buttonThem.TabIndex = 4;
+            buttonThem.Size = new Size(75, 30);
+            buttonThem.TabIndex = 6;
             buttonThem.Text = "THÊM";
             buttonThem.UseVisualStyleBackColor = true;
-            buttonThem.Click += buttonThem_Click;
+            buttonThem.Click += buttonThem_Click_1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(300, 19);
+            label4.Name = "label4";
+            label4.Size = new Size(189, 21);
+            label4.TabIndex = 5;
+            label4.Text = "DANH SÁCH SINH VIÊN";
             // 
             // buttonSearch
             // 
@@ -131,17 +145,37 @@ namespace PMQLSVDH
             // 
             // dataGridView
             // 
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Columns.AddRange(new DataGridViewColumn[] { MaSV, TenSV, DiaChi, SDT, NgaySinh, Email, GioiTinh, LopHoc });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.Location = new Point(300, 50);
+            dataGridView.MultiSelect = false;
             dataGridView.Name = "dataGridView";
+            dataGridView.ReadOnly = true;
             dataGridView.RowHeadersWidth = 51;
             dataGridView.Size = new Size(1024, 330);
             dataGridView.TabIndex = 0;
             // 
             // MaSV
             // 
-            MaSV.HeaderText = "Mã Sinh viên";
+            MaSV.HeaderText = "Mã SV";
             MaSV.MinimumWidth = 6;
             MaSV.Name = "MaSV";
             MaSV.ReadOnly = true;
@@ -229,7 +263,6 @@ namespace PMQLSVDH
             // 
             // buttonHuy
             // 
-            buttonHuy.Enabled = false;
             buttonHuy.Location = new Point(1005, 343);
             buttonHuy.Name = "buttonHuy";
             buttonHuy.Size = new Size(100, 30);
@@ -251,7 +284,6 @@ namespace PMQLSVDH
             // 
             // buttonXacNhan
             // 
-            buttonXacNhan.Enabled = false;
             buttonXacNhan.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             buttonXacNhan.Location = new Point(1201, 343);
             buttonXacNhan.Name = "buttonXacNhan";
@@ -511,11 +543,15 @@ namespace PMQLSVDH
             ResumeLayout(false);
         }
 
+        private void ButtonThem_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private Panel panel1;
         private Panel panel2;
-        private Button buttonThem;
         private Button buttonSearch;
         private TextBox textBoxSearch;
         private Label label1;
@@ -540,6 +576,10 @@ namespace PMQLSVDH
         private Button buttonXacNhan;
         private Button buttonXoa;
         private Button buttonHuy;
+        private TableLayoutPanel tableLayoutPanelGioiTinh;
+        private RadioButton radioButtonNu;
+        private RadioButton radioButtonNam;
+        private Label label4;
         private DataGridViewTextBoxColumn MaSV;
         private DataGridViewTextBoxColumn TenSV;
         private DataGridViewTextBoxColumn DiaChi;
@@ -548,8 +588,6 @@ namespace PMQLSVDH
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn GioiTinh;
         private DataGridViewTextBoxColumn LopHoc;
-        private TableLayoutPanel tableLayoutPanelGioiTinh;
-        private RadioButton radioButtonNu;
-        private RadioButton radioButtonNam;
+        private Button buttonThem;
     }
 }

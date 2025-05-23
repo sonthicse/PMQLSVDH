@@ -44,9 +44,13 @@
             textBoxEmail = new TextBox();
             dateTimePickerNgaySinh = new DateTimePicker();
             comboBoxLop = new ComboBox();
-            buttonXacNhan = new Button();
             buttonHuy = new Button();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            radioButtonNam = new RadioButton();
+            radioButtonNu = new RadioButton();
+            buttonXacNhan = new Button();
             tableLayoutPanel.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel
@@ -73,8 +77,9 @@
             tableLayoutPanel.Controls.Add(textBoxEmail, 3, 2);
             tableLayoutPanel.Controls.Add(dateTimePickerNgaySinh, 1, 2);
             tableLayoutPanel.Controls.Add(comboBoxLop, 3, 3);
-            tableLayoutPanel.Controls.Add(buttonXacNhan, 3, 4);
             tableLayoutPanel.Controls.Add(buttonHuy, 2, 4);
+            tableLayoutPanel.Controls.Add(flowLayoutPanel1, 1, 3);
+            tableLayoutPanel.Controls.Add(buttonXacNhan, 3, 4);
             tableLayoutPanel.Location = new Point(20, 20);
             tableLayoutPanel.Name = "tableLayoutPanel";
             tableLayoutPanel.RowCount = 5;
@@ -235,29 +240,60 @@
             comboBoxLop.Size = new Size(249, 29);
             comboBoxLop.TabIndex = 24;
             // 
-            // buttonXacNhan
-            // 
-            buttonXacNhan.Dock = DockStyle.Right;
-            buttonXacNhan.Font = new Font("Segoe UI", 12F);
-            buttonXacNhan.Location = new Point(586, 291);
-            buttonXacNhan.Name = "buttonXacNhan";
-            buttonXacNhan.Size = new Size(151, 67);
-            buttonXacNhan.TabIndex = 25;
-            buttonXacNhan.Text = "XÁC NHẬN";
-            buttonXacNhan.UseVisualStyleBackColor = true;
-            buttonXacNhan.Click += buttonXacNhan_Click;
-            // 
             // buttonHuy
             // 
-            buttonHuy.Dock = DockStyle.Right;
-            buttonHuy.Font = new Font("Segoe UI", 12F);
-            buttonHuy.Location = new Point(407, 291);
+            buttonHuy.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonHuy.Location = new Point(388, 291);
             buttonHuy.Name = "buttonHuy";
-            buttonHuy.Size = new Size(75, 67);
+            buttonHuy.Size = new Size(94, 30);
             buttonHuy.TabIndex = 26;
             buttonHuy.Text = "HỦY";
             buttonHuy.UseVisualStyleBackColor = true;
             buttonHuy.Click += buttonHuy_Click;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(radioButtonNam);
+            flowLayoutPanel1.Controls.Add(radioButtonNu);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Font = new Font("Segoe UI", 12F);
+            flowLayoutPanel1.Location = new Point(133, 219);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(249, 66);
+            flowLayoutPanel1.TabIndex = 27;
+            // 
+            // radioButtonNam
+            // 
+            radioButtonNam.AutoSize = true;
+            radioButtonNam.Location = new Point(3, 3);
+            radioButtonNam.Name = "radioButtonNam";
+            radioButtonNam.Size = new Size(62, 25);
+            radioButtonNam.TabIndex = 0;
+            radioButtonNam.TabStop = true;
+            radioButtonNam.Text = "Nam";
+            radioButtonNam.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonNu
+            // 
+            radioButtonNu.AutoSize = true;
+            radioButtonNu.Location = new Point(71, 3);
+            radioButtonNu.Name = "radioButtonNu";
+            radioButtonNu.Size = new Size(49, 25);
+            radioButtonNu.TabIndex = 1;
+            radioButtonNu.TabStop = true;
+            radioButtonNu.Text = "Nữ";
+            radioButtonNu.UseVisualStyleBackColor = true;
+            // 
+            // buttonXacNhan
+            // 
+            buttonXacNhan.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            buttonXacNhan.Location = new Point(488, 291);
+            buttonXacNhan.Name = "buttonXacNhan";
+            buttonXacNhan.Size = new Size(120, 30);
+            buttonXacNhan.TabIndex = 25;
+            buttonXacNhan.Text = "XÁC NHẬN";
+            buttonXacNhan.UseVisualStyleBackColor = true;
+            buttonXacNhan.Click += buttonXacNhan_Click;
             // 
             // ThemSinhVienForm
             // 
@@ -269,6 +305,8 @@
             Text = "ThemSinhVienForm";
             tableLayoutPanel.ResumeLayout(false);
             tableLayoutPanel.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -292,5 +330,8 @@
         private ComboBox comboBoxLop;
         private Button buttonXacNhan;
         private Button buttonHuy;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private RadioButton radioButtonNam;
+        private RadioButton radioButtonNu;
     }
 }

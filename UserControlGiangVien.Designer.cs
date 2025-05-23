@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            label7 = new Label();
             buttonThem = new Button();
             buttonSearch = new Button();
             textBoxSearch = new TextBox();
@@ -40,6 +43,7 @@
             MonHoc = new DataGridViewTextBoxColumn();
             Khoa = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
+            label8 = new Label();
             buttonSua = new Button();
             buttonThemLH = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
@@ -67,6 +71,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlLightLight;
+            panel1.Controls.Add(label7);
             panel1.Controls.Add(buttonThem);
             panel1.Controls.Add(buttonSearch);
             panel1.Controls.Add(textBoxSearch);
@@ -76,6 +81,16 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1344, 400);
             panel1.TabIndex = 2;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label7.Location = new Point(300, 15);
+            label7.Name = "label7";
+            label7.Size = new Size(201, 21);
+            label7.TabIndex = 5;
+            label7.Text = "DANH SÁCH GIẢNG VIÊN";
             // 
             // buttonThem
             // 
@@ -123,9 +138,26 @@
             dataGridView.AllowUserToOrderColumns = true;
             dataGridView.AllowUserToResizeColumns = false;
             dataGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Columns.AddRange(new DataGridViewColumn[] { MaGV, TenGV, Email, MonHoc, Khoa });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView.Location = new Point(300, 50);
+            dataGridView.MultiSelect = false;
             dataGridView.Name = "dataGridView";
             dataGridView.ReadOnly = true;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -165,6 +197,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLightLight;
+            panel2.Controls.Add(label8);
             panel2.Controls.Add(buttonSua);
             panel2.Controls.Add(buttonThemLH);
             panel2.Controls.Add(tableLayoutPanel1);
@@ -174,6 +207,16 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1344, 400);
             panel2.TabIndex = 3;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label8.Location = new Point(463, 19);
+            label8.Name = "label8";
+            label8.Size = new Size(175, 21);
+            label8.TabIndex = 8;
+            label8.Text = "DANH SÁCH LỚP DẠY";
             // 
             // buttonSua
             // 
@@ -329,8 +372,10 @@
             dataGridViewLopHoc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewLopHoc.Columns.AddRange(new DataGridViewColumn[] { MaLop, TenLop, SoHS });
             dataGridViewLopHoc.Location = new Point(463, 50);
+            dataGridViewLopHoc.MultiSelect = false;
             dataGridViewLopHoc.Name = "dataGridViewLopHoc";
             dataGridViewLopHoc.ReadOnly = true;
+            dataGridViewLopHoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewLopHoc.Size = new Size(861, 330);
             dataGridViewLopHoc.TabIndex = 0;
             // 
@@ -364,6 +409,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLopHoc).EndInit();
@@ -404,5 +450,7 @@
         private DataGridViewTextBoxColumn MaLop;
         private DataGridViewTextBoxColumn TenLop;
         private DataGridViewTextBoxColumn SoHS;
+        private Label label7;
+        private Label label8;
     }
 }

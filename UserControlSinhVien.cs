@@ -40,11 +40,7 @@ namespace PMQLSVDH
         }
 
 
-        private void buttonThem_Click(object sender, EventArgs e)
-        {
-            ThemSinhVienForm themSV = new ThemSinhVienForm();
-            themSV.ShowDialog();
-        }
+
 
         private void buttonSua_Click(object sender, EventArgs e)
         {
@@ -59,6 +55,8 @@ namespace PMQLSVDH
             textBoxSDT.Enabled = true;
             textBoxEmail.Enabled = true;
             comboBoxLop.Enabled = true;
+            radioButtonNam.Enabled = true;
+            radioButtonNu.Enabled = true;
         }
 
         // ───── Hiển thị chi tiết sinh viên ─────
@@ -81,6 +79,12 @@ namespace PMQLSVDH
             radioButtonNu.Checked = gt == "Nữ";
 
             comboBoxLop.Text = r["LopHoc"].Value?.ToString() ?? "";
+        }
+
+        private void buttonThem_Click_1(object sender, EventArgs e)
+        {
+            ThemSinhVienForm themSV = new ThemSinhVienForm();
+            themSV.ShowDialog();
         }
     }
 }

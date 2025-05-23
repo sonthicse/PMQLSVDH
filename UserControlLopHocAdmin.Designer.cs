@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label5 = new Label();
             buttonThem = new Button();
             buttonSearch = new Button();
             textBoxSearch = new TextBox();
@@ -39,6 +40,8 @@
             TenLop = new DataGridViewTextBoxColumn();
             SoHS = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
+            label7 = new Label();
+            label6 = new Label();
             buttonThemMH = new Button();
             buttonThemSV = new Button();
             dataGridViewSV = new DataGridView();
@@ -61,15 +64,27 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlLightLight;
+            panel1.Controls.Add(label5);
             panel1.Controls.Add(buttonThem);
             panel1.Controls.Add(buttonSearch);
             panel1.Controls.Add(textBoxSearch);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(dataGridView);
+            panel1.Font = new Font("Segoe UI", 12F);
             panel1.Location = new Point(20, 20);
             panel1.Name = "panel1";
             panel1.Size = new Size(1344, 400);
             panel1.TabIndex = 1;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label5.Location = new Point(300, 19);
+            label5.Name = "label5";
+            label5.Size = new Size(176, 21);
+            label5.TabIndex = 5;
+            label5.Text = "DANH SÁCH LỚP HỌC";
             // 
             // buttonThem
             // 
@@ -151,6 +166,8 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLightLight;
+            panel2.Controls.Add(label7);
+            panel2.Controls.Add(label6);
             panel2.Controls.Add(buttonThemMH);
             panel2.Controls.Add(buttonThemSV);
             panel2.Controls.Add(dataGridViewSV);
@@ -161,6 +178,26 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1344, 400);
             panel2.TabIndex = 2;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label7.Location = new Point(875, 17);
+            label7.Name = "label7";
+            label7.Size = new Size(221, 21);
+            label7.TabIndex = 8;
+            label7.Text = "DANH SÁCH CÁC MÔN HỌC";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label6.Location = new Point(405, 17);
+            label6.Name = "label6";
+            label6.Size = new Size(189, 21);
+            label6.TabIndex = 7;
+            label6.Text = "DANH SÁCH SINH VIÊN";
             // 
             // buttonThemMH
             // 
@@ -294,6 +331,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSV).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
@@ -325,5 +363,8 @@
         private DataGridViewTextBoxColumn KhoaHoc;
         private DataGridViewTextBoxColumn TenLop;
         private DataGridViewTextBoxColumn SoHS;
+        private Label label5;
+        private Label label7;
+        private Label label6;
     }
 }
