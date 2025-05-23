@@ -15,7 +15,15 @@ namespace PMQLSVDH
         public UserControlSinhVien()
         {
             InitializeComponent();
+
+            // chỉ chọn 1 dòng, nguyên hàng
+            dataGridView.MultiSelect = false;
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // sự kiện chọn sinh viên
+            dataGridView.SelectionChanged += DataGridView_SelectionChanged;
         }
+
 
         private void buttonThem_Click(object sender, EventArgs e)
         {
@@ -36,10 +44,29 @@ namespace PMQLSVDH
             textBoxSDT.Enabled = true;
             textBoxEmail.Enabled = true;
             comboBoxLop.Enabled = true;
-            textBoxDiemCC.Enabled = true;
-            textBoxDiemTX.Enabled = true;
-            textBoxDiemTHI.Enabled = true;
-            
         }
+
+        // ───── Hiển thị chi tiết sinh viên ─────
+        private void DataGridView_SelectionChanged(object? sender, EventArgs e)
+        {
+            if (dataGridView.CurrentRow == null) return;
+            var r = dataGridView.CurrentRow.Cells;
+
+            textBoxMaSV.Text = r["MaSV"].Value?.ToString() ?? "";
+            textBoxTenSV.Text = r["TenSV"].Value?.ToString() ?? "";
+            DateTime.TryParse(r["NgaySinh"].Value?.ToString(), out var d);
+            dateTimePickerNgaySinh.Value = d == DateTime.MinValue ? DateTime.Today : d;
+
+            textBoxDiaChi.Text = r["DiaChi"].Value?.ToString() ?? "";
+            textBoxSDT.Text = r["SDT"].Value?.ToString() ?? "";
+            textBoxEmail.Text = r["Email"].Value?.ToString() ?? "";
+
+            var gt = r["GioiTinh"].Value?.ToString();
+            radioButtonNam.Checked = gt == "Nam";
+            radioButtonNu.Checked = gt == "Nữ";
+
+            comboBoxLop.Text = r["LopHoc"].Value?.ToString() ?? "";
+        }
+
     }
 }

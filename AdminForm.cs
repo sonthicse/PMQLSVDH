@@ -56,8 +56,17 @@ namespace PMQLSVDH
         {
             navigationControl.Display(1);
             navigationButton.Highlight(buttonSinhVien);
+
             DatabaseHelper.LoadDataSV(sinhVien.dataGridView);
+
+            // auto-select hàng đầu & hiển thị chi tiết
+            if (sinhVien.dataGridView.Rows.Count > 0)
+            {
+                sinhVien.dataGridView.ClearSelection();
+                sinhVien.dataGridView.Rows[0].Selected = true;
+            }
         }
+
 
         private void buttonGiangVien_Click(object sender, EventArgs e)
         {

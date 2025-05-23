@@ -133,59 +133,54 @@ namespace PMQLSVDH
             cmd2.ExecuteNonQuery();
         }
 
-        public static void LoadDataSV(DataGridView dataGridView)
+        // THÊM dưới cùng class DatabaseHelper
+        public static void LoadDataSV(DataGridView dgv, string? kw = null)
         {
-            try
+            var sb = new StringBuilder(@"
+        SELECT sv.MaSV      AS [Mã SV],
+               sv.TenSV     AS [Họ và tên],
+               sv.NgaySinh  AS [Ngày sinh],
+               sv.GioiTinh  AS [Giới tính],
+               sv.DiaChi    AS [Địa chỉ],
+               sv.SDT       AS [SĐT],
+               sv.Email     AS [Email],
+               lh.TenLop    AS [Lớp]
+          FROM SinhVien sv
+          JOIN LopHoc  lh ON sv.MaLop = lh.MaLop
+         WHERE 1 = 1 ");
+
+            bool hasKw = !string.IsNullOrWhiteSpace(kw);
+            bool numeric = hasKw && double.TryParse(kw, out _);
+            if (hasKw)
             {
-                using var conn = new SqliteConnection(Conn);
-                conn.Open();
-
-                string query = @"
-            SELECT 
-                sv.MaSV AS [Mã Sinh viên],
-                sv.TenSV AS [Họ và tên],
-                sv.DiaChi AS [Địa chỉ],
-                sv.SDT AS [SĐT],
-                sv.NgaySinh AS [Ngày sinh],
-                sv.Email AS [Email],
-                sv.GioiTinh AS [Giới tính],
-                lh.TenLop AS [Lớp]
-            FROM SinhVien sv
-            INNER JOIN LopHoc lh ON sv.MaLop = lh.MaLop
-            ORDER BY lh.MaLop, sv.MaSV";
-
-                using var cmd = new SqliteCommand(query, conn);
-                using var reader = cmd.ExecuteReader();
-                var dt = new DataTable();
-                dt.Load(reader);
-
-                dataGridView.AutoGenerateColumns = false;
-
-                // Gán DataPropertyName cho các cột tương ứng
-                if (dataGridView.Columns.Contains("MaSV"))
-                    dataGridView.Columns["MaSV"].DataPropertyName = "Mã Sinh viên";
-                if (dataGridView.Columns.Contains("TenSV"))
-                    dataGridView.Columns["TenSV"].DataPropertyName = "Họ và tên";
-                if (dataGridView.Columns.Contains("DiaChi"))
-                    dataGridView.Columns["DiaChi"].DataPropertyName = "Địa chỉ";
-                if (dataGridView.Columns.Contains("SDT"))
-                    dataGridView.Columns["SDT"].DataPropertyName = "SĐT";
-                if (dataGridView.Columns.Contains("NgaySinh"))
-                    dataGridView.Columns["NgaySinh"].DataPropertyName = "Ngày sinh";
-                if (dataGridView.Columns.Contains("Email"))
-                    dataGridView.Columns["Email"].DataPropertyName = "Email";
-                if (dataGridView.Columns.Contains("GioiTinh"))
-                    dataGridView.Columns["GioiTinh"].DataPropertyName = "Giới tính";
-                if (dataGridView.Columns.Contains("LopHoc"))
-                    dataGridView.Columns["LopHoc"].DataPropertyName = "Lớp";
-
-                dataGridView.DataSource = dt;
+                if (numeric)
+                    sb.AppendLine("AND (sv.MaSV LIKE @kwLike OR sv.SDT LIKE @kwLike)");
+                else
+                    sb.AppendLine("AND (sv.MaSV LIKE @kwLike OR sv.TenSV LIKE @kwLike OR sv.Email LIKE @kwLike)");
             }
-            catch (Exception ex)
+            sb.AppendLine("ORDER BY sv.MaSV");
+
+            using var c = new SqliteConnection(Conn); c.Open();
+            using var cmd = new SqliteCommand(sb.ToString(), c);
+            if (hasKw) cmd.Parameters.AddWithValue("@kwLike", $"%{kw}%");
+
+            var dt = new DataTable(); dt.Load(cmd.ExecuteReader());
+
+            // ánh xạ cột 1 lần
+            if (dgv.Columns["MaSV"].DataPropertyName == "")
             {
-                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dgv.AutoGenerateColumns = false;
+                dgv.Columns["MaSV"].DataPropertyName = "Mã SV";
+                dgv.Columns["TenSV"].DataPropertyName = "Họ và tên";
+                dgv.Columns["NgaySinh"].DataPropertyName = "Ngày sinh";
+                dgv.Columns["GioiTinh"].DataPropertyName = "Giới tính";
+                dgv.Columns["DiaChi"].DataPropertyName = "Địa chỉ";
+                dgv.Columns["SDT"].DataPropertyName = "SĐT";
+                dgv.Columns["Email"].DataPropertyName = "Email";
+                dgv.Columns["LopHoc"].DataPropertyName = "Lớp";
             }
+            dgv.DataSource = dt;
         }
+
     }
 }
