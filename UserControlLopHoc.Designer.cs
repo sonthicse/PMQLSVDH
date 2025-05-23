@@ -282,7 +282,6 @@
             buttonSua.TabIndex = 1;
             buttonSua.Text = "SỬA";
             buttonSua.UseVisualStyleBackColor = true;
-            buttonSua.Click += buttonSua_Click;
             // 
             // tableLayoutPanel
             // 
@@ -563,6 +562,7 @@
             // radioButtonNam
             // 
             radioButtonNam.AutoSize = true;
+            radioButtonNam.Enabled = false;
             radioButtonNam.Font = new Font("Segoe UI", 12F);
             radioButtonNam.Location = new Point(3, 3);
             radioButtonNam.Name = "radioButtonNam";
@@ -575,6 +575,7 @@
             // radioButtonNu
             // 
             radioButtonNu.AutoSize = true;
+            radioButtonNu.Enabled = false;
             radioButtonNu.Font = new Font("Segoe UI", 12F);
             radioButtonNu.Location = new Point(151, 3);
             radioButtonNu.Name = "radioButtonNu";

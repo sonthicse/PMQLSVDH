@@ -24,6 +24,7 @@ namespace PMQLSVDH
 
         private Color btnDefaultColor = Color.FromKnownColor(KnownColor.ControlLight);
         private Color btnSelectedColor = Color.FromKnownColor(KnownColor.ControlDark);
+        public DataGridView dataGridView;
         public AdminForm()
         {
             InitializeComponent();
@@ -55,6 +56,7 @@ namespace PMQLSVDH
         {
             navigationControl.Display(1);
             navigationButton.Highlight(buttonSinhVien);
+            DatabaseHelper.LoadDataSV(sinhVien.dataGridView);
         }
 
         private void buttonGiangVien_Click(object sender, EventArgs e)
