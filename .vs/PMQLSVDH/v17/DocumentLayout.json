@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|c:\\users\\duong\\onedrive\\anhttt59(clc)\\pmqlsvdh\\usercontrolmh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|solutionrelative:usercontrolmh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|c:\\users\\duong\\onedrive\\anhttt59(clc)\\pmqlsvdh\\usercontrolmh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|solutionrelative:usercontrolmh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|c:\\users\\duong\\onedrive\\anhttt59(clc)\\pmqlsvdh\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|solutionrelative:databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|c:\\users\\duong\\onedrive\\anhttt59(clc)\\pmqlsvdh\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|c:\\users\\duong\\onedrive\\anhttt59(clc)\\pmqlsvdh\\adminform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|solutionrelative:adminform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|c:\\users\\duong\\onedrive\\anhttt59(clc)\\pmqlsvdh\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{027C4A2A-1AE9-4B6B-BAFA-F037F67C4CA4}|PMQLSVDH.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
@@ -14,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,7 +46,71 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DatabaseHelper.cs",
+              "DocumentMoniker": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\DatabaseHelper.cs",
+              "RelativeDocumentMoniker": "DatabaseHelper.cs",
+              "ToolTip": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\DatabaseHelper.cs",
+              "RelativeToolTip": "DatabaseHelper.cs",
+              "ViewState": "AgIAAHUCAAAAAAAAAAAkwNoCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T01:52:52.638Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserControlMH.cs",
+              "DocumentMoniker": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\UserControlMH.cs",
+              "RelativeDocumentMoniker": "UserControlMH.cs",
+              "ToolTip": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\UserControlMH.cs",
+              "RelativeToolTip": "UserControlMH.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAiwGgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T01:42:06.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UserControlMH.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\UserControlMH.cs",
+              "RelativeDocumentMoniker": "UserControlMH.cs",
+              "ToolTip": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\UserControlMH.cs [Design]",
+              "RelativeToolTip": "UserControlMH.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T01:37:55.348Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\AdminForm.Designer.cs",
+              "RelativeDocumentMoniker": "AdminForm.Designer.cs",
+              "ToolTip": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\AdminForm.Designer.cs",
+              "RelativeToolTip": "AdminForm.Designer.cs",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAvwKcAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T01:35:54.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AdminForm.cs",
+              "DocumentMoniker": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\AdminForm.cs",
+              "RelativeDocumentMoniker": "AdminForm.cs",
+              "ToolTip": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\AdminForm.cs",
+              "RelativeToolTip": "AdminForm.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAjwCQAAAB2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T01:35:23.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "AdminForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\duong\\OneDrive\\ANHTTT59(CLC)\\PMQLSVDH\\AdminForm.cs",
               "RelativeDocumentMoniker": "AdminForm.cs",

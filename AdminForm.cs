@@ -17,7 +17,7 @@ namespace PMQLSVDH
         private UserControlGiangVien giangVien = new UserControlGiangVien();
         private UserControlLopHocAdmin lopHoc = new UserControlLopHocAdmin();
         private UserControlKhoa khoa = new UserControlKhoa();
-        private UserControlTaiKhoan taiKhoan = new UserControlTaiKhoan();
+        private UserControlMH mH = new UserControlMH();
 
         private NavigationButton navigationButton;
         private NavigationControl navigationControl;
@@ -34,7 +34,7 @@ namespace PMQLSVDH
 
         private void InitializeNavigationControl()
         {
-            List<UserControl> userControls = new List<UserControl>() { trangChu, sinhVien, giangVien, lopHoc, khoa, taiKhoan };
+            List<UserControl> userControls = new List<UserControl>() { trangChu, sinhVien, giangVien, lopHoc, khoa, mH };
             navigationControl = new NavigationControl(userControls, panel);
             navigationControl.Display(0);
         }
@@ -98,7 +98,7 @@ namespace PMQLSVDH
             navigationButton.Highlight(buttonKhoa);
         }
 
-        private void buttonTaiKhoan_Click(object sender, EventArgs e)
+        private void buttonMH_Click(object sender, EventArgs e)
         {
             navigationControl.Display(5);
             navigationButton.Highlight(buttonMH);

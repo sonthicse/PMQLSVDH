@@ -165,7 +165,7 @@
             buttonMH.TabIndex = 5;
             buttonMH.Text = "MÔN HỌC";
             buttonMH.UseVisualStyleBackColor = true;
-            buttonMH.Click += buttonTaiKhoan_Click;
+            buttonMH.Click += buttonMH_Click;
             // 
             // panel
             // 

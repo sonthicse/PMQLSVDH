@@ -39,8 +39,6 @@ namespace PMQLSVDH
             return dt;
         }
 
-
-
         // ────────────────────────────────────────────────
         // 2. Danh sách sinh viên + điểm
         // ────────────────────────────────────────────────
@@ -652,6 +650,84 @@ WHERE   1 = 1");
             return dt;
         }
 
+        // ─────────────────────────────────────────────────────────────
+        // 8.  Danh sách giảng viên dạy 1 môn học
+        // ─────────────────────────────────────────────────────────────
+        public static void LoadGiangVienByMH(DataGridView dgv,
+                                             string maMH,
+                                             string? kw = null)
+        {
+            if (string.IsNullOrWhiteSpace(maMH))
+            {
+                dgv.DataSource = null;
+                return;
+            }
+
+            var sb = new StringBuilder(@"
+SELECT gv.MaGV  AS [Mã GV],
+       gv.TenGV AS [Họ và tên],
+       gv.Email AS [Email],
+       mh.TenMH AS [Môn học],
+       k.TenKhoa AS [Khoa]
+FROM   GiangVien gv
+JOIN   MonHoc   mh ON gv.MaMH   = mh.MaMH
+JOIN   Khoa      k ON gv.MaKhoa = k.MaKhoa
+WHERE  gv.MaMH = @MaMH ");
+
+            if (!string.IsNullOrWhiteSpace(kw))
+                sb.AppendLine("AND (gv.MaGV LIKE @kw OR gv.TenGV LIKE @kw OR gv.Email LIKE @kw)");
+
+            sb.AppendLine("ORDER BY gv.MaGV;");
+
+            using var c = new SqliteConnection(Conn); c.Open();
+            using var cmd = new SqliteCommand(sb.ToString(), c);
+            cmd.Parameters.AddWithValue("@MaMH", maMH);
+            if (kw != null) cmd.Parameters.AddWithValue("@kw", $"%{kw.Trim()}%");
+
+            var dt = new DataTable(); dt.Load(cmd.ExecuteReader());
+
+            /* ánh xạ cột 1 lần duy nhất */
+            if (string.IsNullOrEmpty(dgv.Columns["MaGV"]?.DataPropertyName))
+            {
+                dgv.AutoGenerateColumns = false;
+                dgv.Columns.Clear();
+                dgv.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "MaGV",
+                    HeaderText = "Mã GV",
+                    DataPropertyName = "Mã GV",
+                    Width = 90
+                });
+                dgv.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "TenGV",
+                    HeaderText = "Họ và tên",
+                    DataPropertyName = "Họ và tên",
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                });
+                dgv.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "Email",
+                    HeaderText = "Email",
+                    DataPropertyName = "Email",
+                    Width = 200
+                });
+                dgv.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "MonHoc",
+                    HeaderText = "Môn học",
+                    DataPropertyName = "Môn học"
+                });
+                dgv.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "Khoa",
+                    HeaderText = "Khoa",
+                    DataPropertyName = "Khoa"
+                });
+            }
+
+            dgv.DataSource = dt;
+        }
 
     }
 
