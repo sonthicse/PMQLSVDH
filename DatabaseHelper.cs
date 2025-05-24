@@ -439,5 +439,161 @@ VALUES (@MaGV,@TenGV,@Email,@MaKhoa,@MaMH);";
             cmd.ExecuteNonQuery();
             return true;
         }
+        // DatabaseHelper.cs
+        // ────────────────────────────────────────────────────────
+        // 7.  Danh sách Mã-Tên môn học của MỘT lớp
+        // ────────────────────────────────────────────────────────
+      
+        // ───────────────────────────────────────────────────
+        // 5.  Danh sách Mã-Tên sinh viên (tùy chọn theo lớp)
+        // ───────────────────────────────────────────────────
+        public static void LoadMaTenSV(DataGridView dgv,
+                                       string? maLop = null,
+                                       string? kw = null)
+        {
+            var sql = new StringBuilder(@"
+        SELECT sv.MaSV AS [Mã SV],
+               sv.TenSV AS [Tên SV]
+          FROM SinhVien sv ");
+
+            if (!string.IsNullOrWhiteSpace(maLop))
+                sql.AppendLine("WHERE sv.MaLop = @MaLop");
+
+            if (!string.IsNullOrWhiteSpace(kw))
+                sql.AppendLine((maLop == null ? "WHERE" : "AND") +
+                               " (sv.MaSV LIKE @kw OR sv.TenSV LIKE @kw)");
+
+            sql.AppendLine("ORDER BY sv.MaSV;");
+
+            using var c = new SqliteConnection(Conn); c.Open();
+            using var cmd = new SqliteCommand(sql.ToString(), c);
+            if (maLop != null) cmd.Parameters.AddWithValue("@MaLop", maLop);
+            if (kw != null) cmd.Parameters.AddWithValue("@kw", $"%{kw.Trim()}%");
+
+            var dt = new DataTable(); dt.Load(cmd.ExecuteReader());
+
+            // ánh xạ cột một lần
+            if (dgv.Columns["MaSV"]?.DataPropertyName == "")
+            {
+                dgv.AutoGenerateColumns = false;
+                dgv.Columns["MaSV"].DataPropertyName = "Mã SV";
+                dgv.Columns["TenSV"].DataPropertyName = "Tên SV";
+            }
+            dgv.DataSource = dt;
+        }
+        // ───────────────────────────────────────────────────
+        // 6.  Danh sách Mã-Tên môn học (tùy chọn theo khoa)
+        // ───────────────────────────────────────────────────
+        public static void LoadMaTenMH(DataGridView dgv,
+                                       string? maKhoa = null,
+                                       string? kw = null)
+        {
+            var sql = new StringBuilder(@"
+        SELECT mh.MaMH AS [Mã MH],
+               mh.TenMH AS [Tên MH]
+          FROM MonHoc mh ");
+
+            // 1. Lọc theo khoa (nếu có)
+            if (!string.IsNullOrWhiteSpace(maKhoa))
+                sql.AppendLine("WHERE mh.MaKhoa = @MaKhoa");
+
+            // 2. Tìm kiếm nhanh
+            if (!string.IsNullOrWhiteSpace(kw))
+                sql.AppendLine((maKhoa == null ? "WHERE" : "AND") +
+                               " (mh.MaMH LIKE @kw OR mh.TenMH LIKE @kw)");
+
+            sql.AppendLine("ORDER BY mh.MaMH;");
+
+            using var c = new SqliteConnection(Conn); c.Open();
+            using var cmd = new SqliteCommand(sql.ToString(), c);
+            if (maKhoa != null) cmd.Parameters.AddWithValue("@MaKhoa", maKhoa);
+            if (kw != null) cmd.Parameters.AddWithValue("@kw", $"%{kw.Trim()}%");
+
+            var dt = new DataTable(); dt.Load(cmd.ExecuteReader());
+
+            // ánh xạ cột – chỉ cần 1 lần cho mỗi DataGridView
+            if (dgv.Columns["MaMH"]?.DataPropertyName == "")
+            {
+                dgv.AutoGenerateColumns = false;
+                dgv.Columns["MaMH"].DataPropertyName = "Mã MH";
+                dgv.Columns["TenMH"].DataPropertyName = "Tên MH";
+            }
+            dgv.DataSource = dt;
+        }
+        // DatabaseHelper.cs
+        // ─────────────────────────────────────────────────────────────
+        // 7.  Danh sách Mã-Tên môn học CỦA MỘT LỚP (theo GiangDay)
+        // ─────────────────────────────────────────────────────────────
+        public static void LoadMaTenMHByLop(DataGridView dgv,
+                                            string maLop,
+                                            string? kw = null)
+        {
+            if (string.IsNullOrWhiteSpace(maLop))
+            {
+                dgv.DataSource = null;
+                return;
+            }
+
+            var sb = new StringBuilder(@"
+        SELECT mh.MaMH  AS [Mã MH],
+               mh.TenMH AS [Tên MH]
+        FROM   GiangDay gd
+        JOIN   MonHoc   mh ON mh.MaMH = gd.MaMH
+        WHERE  gd.MaLop = @MaLop ");
+
+            // thêm điều kiện tìm kiếm nếu có
+            if (!string.IsNullOrWhiteSpace(kw))
+                sb.AppendLine("AND (mh.MaMH LIKE @kw OR mh.TenMH LIKE @kw)");
+
+            sb.AppendLine("ORDER BY mh.MaMH;");
+
+            DataTable dt = new();
+
+            try
+            {
+                using var c = new SqliteConnection(Conn);
+                using var cmd = new SqliteCommand(sb.ToString(), c);
+
+                cmd.Parameters.AddWithValue("@MaLop", maLop);
+                if (!string.IsNullOrWhiteSpace(kw))
+                    cmd.Parameters.AddWithValue("@kw", $"%{kw.Trim()}%");
+
+                c.Open();
+                using var rdr = cmd.ExecuteReader();
+                dt.Load(rdr);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"SQL ERROR: {ex.Message}", "LoadMaTenMHByLop");
+                return;                     // không gán DataSource khi lỗi
+            }
+
+            /* ánh xạ cột (chạy đúng 1 lần cho dgv này) */
+            if (string.IsNullOrEmpty(dgv.Columns["MaMH"]?.DataPropertyName))
+            {
+                dgv.AutoGenerateColumns = false;
+                dgv.Columns.Clear();
+
+                dgv.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "MaMH",
+                    HeaderText = "Mã MH",
+                    DataPropertyName = "Mã MH",
+                    Width = 90
+                });
+                dgv.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    Name = "TenMH",
+                    HeaderText = "Tên MH",
+                    DataPropertyName = "Tên MH",
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+                });
+            }
+
+            dgv.DataSource = dt;
+        }
+
+
     }
+
 }

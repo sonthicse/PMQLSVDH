@@ -366,8 +366,60 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewMH).EndInit();
             ResumeLayout(false);
         }
+        private void InitGridSinhVien()
+        {
+            // 1. Khai báo 2 cột – chỉ chạy 1 lần
+            dataGridViewSV.AutoGenerateColumns = false;
+            dataGridViewSV.Columns.Clear();
+
+            dataGridViewSV.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "MaSV",
+                HeaderText = "Mã SV",
+                DataPropertyName = "",      // gán sau trong DB helper
+                Width = 100
+            });
+            dataGridViewSV.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "TenSV",
+                HeaderText = "Tên SV",
+                DataPropertyName = "",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            });
+
+            // 2. Nạp dữ liệu ban đầu (toàn bộ SV)
+            //DatabaseHelper.LoadMaTenSV(dataGridViewSV);
+        }
 
         #endregion
+        private void InitGridMonHoc()
+        {
+            dataGridViewMH.AutoGenerateColumns = false;
+            dataGridViewMH.Columns.Clear();
+
+            dataGridViewMH.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "MaMH",
+                HeaderText = "Mã MH",
+                DataPropertyName = "",           // gán sau trong DB helper
+                Width = 100
+            });
+            dataGridViewMH.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "TenMH",
+                HeaderText = "Tên MH",
+                DataPropertyName = "",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            });
+
+            // Nạp toàn bộ môn học ban đầu
+            //DatabaseHelper.LoadMaTenMH(dataGridViewMH);
+                
+        }
+        // dataGridView  = lưới Lớp
+        
+
+
 
         private Panel panel1;
         private Button buttonThem;
@@ -396,5 +448,6 @@
         private Button buttonSua;
         private Button buttonHuy;
         private Button buttonXN;
+
     }
 }

@@ -21,6 +21,9 @@ namespace PMQLSVDH
             dataGridView.Columns["TenLop"].DataPropertyName = "TenLop";
             dataGridView.Columns["SoHS"].DataPropertyName = "SoHS";
             dataGridView.MultiSelect = false;
+            InitGridSinhVien();
+            InitGridMonHoc();
+
             dataGridView.SelectionChanged += DataGridView_SelectionChanged;
         }
 
@@ -29,13 +32,30 @@ namespace PMQLSVDH
             ThemSinhVienForm themSV = new ThemSinhVienForm();
             themSV.ShowDialog();
         }
-        private void DataGridView_SelectionChanged(object sender, EventArgs e)
+        private void DataGridView_SelectionChanged(object? sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 0) return;
-            var row = dataGridView.SelectedRows[0];
-            textBoxMaLop.Text = row.Cells["MaLop"].Value?.ToString() ?? "";
-            textBoxTenLop.Text = row.Cells["TenLop"].Value?.ToString() ?? "";
-            textBoxKhoaHoc.Text = row.Cells["KhoaHoc"].Value?.ToString() ?? "";
+            if (dataGridView.SelectedRows.Count == 0)
+            {
+                dataGridViewSV.DataSource = null;
+                dataGridViewMH.DataSource = null;
+                return;
+            }
+
+            string maLop = dataGridView.SelectedRows[0]
+                           .Cells["MaLop"].Value!.ToString()!;
+
+            // Đổ sinh viên
+            DatabaseHelper.LoadMaTenSV(dataGridViewSV, maLop);
+
+            // Đổ môn học – dùng bảng GiangDay liên kết Lop ↔ Mon
+            DatabaseHelper.LoadMaTenMHByLop(dataGridViewMH, maLop);
+
+            // Điền textbox
+            textBoxMaLop.Text = maLop;
+            textBoxTenLop.Text = dataGridView.SelectedRows[0]
+                                 .Cells["TenLop"].Value?.ToString() ?? "";
+            textBoxKhoaHoc.Text = dataGridView.SelectedRows[0]
+                                 .Cells["KhoaHoc"].Value?.ToString() ?? "";
         }
 
         private void buttonSua_Click(object sender, EventArgs e)
