@@ -300,7 +300,6 @@
             // 
             textBoxTinChi.BorderStyle = BorderStyle.FixedSingle;
             textBoxTinChi.Dock = DockStyle.Fill;
-            textBoxTinChi.Enabled = false;
             textBoxTinChi.Font = new Font("Segoe UI", 12F);
             textBoxTinChi.Location = new Point(123, 147);
             textBoxTinChi.Name = "textBoxTinChi";
@@ -331,7 +330,6 @@
             // 
             textBoxMaMH.BorderStyle = BorderStyle.FixedSingle;
             textBoxMaMH.Dock = DockStyle.Fill;
-            textBoxMaMH.Enabled = false;
             textBoxMaMH.Font = new Font("Segoe UI", 12F);
             textBoxMaMH.Location = new Point(123, 3);
             textBoxMaMH.Name = "textBoxMaMH";
@@ -342,7 +340,6 @@
             // 
             textBoxTenMH.BorderStyle = BorderStyle.FixedSingle;
             textBoxTenMH.Dock = DockStyle.Fill;
-            textBoxTenMH.Enabled = false;
             textBoxTenMH.Font = new Font("Segoe UI", 12F);
             textBoxTenMH.Location = new Point(123, 75);
             textBoxTenMH.Name = "textBoxTenMH";
@@ -370,12 +367,12 @@
             // comboBoxKhoa
             // 
             comboBoxKhoa.Dock = DockStyle.Fill;
-            comboBoxKhoa.Enabled = false;
             comboBoxKhoa.FormattingEnabled = true;
             comboBoxKhoa.Location = new Point(123, 219);
             comboBoxKhoa.Name = "comboBoxKhoa";
             comboBoxKhoa.Size = new Size(244, 29);
             comboBoxKhoa.TabIndex = 10;
+            comboBoxKhoa.SelectedIndexChanged += comboBoxKhoa_SelectedIndexChanged;
             // 
             // buttonXN
             // 
