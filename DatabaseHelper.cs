@@ -593,6 +593,65 @@ VALUES (@MaGV,@TenGV,@Email,@MaKhoa,@MaMH);";
             dgv.DataSource = dt;
         }
 
+        // THÊM dưới cùng file DatabaseHelper.cs (ngay sau InsertGiangVien chẳng hạn)
+        public static bool InsertLopHoc(LopHoc lh)
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+
+            /* 1. Ngăn trùng khóa chính */
+            const string chk = "SELECT 1 FROM LopHoc WHERE MaLop = @MaLop LIMIT 1";
+            using (var cmdChk = new SqliteCommand(chk, c))
+            {
+                cmdChk.Parameters.AddWithValue("@MaLop", lh.MaLop);
+                if (cmdChk.ExecuteScalar() != null) return false;   // đã tồn tại
+            }
+
+            /* 2. Thực hiện INSERT */
+            const string ins = @"
+        INSERT INTO LopHoc (MaLop, TenLop, KhoaHoc)
+        VALUES (@MaLop, @TenLop, @KhoaHoc);";
+
+            using var cmd = new SqliteCommand(ins, c);
+            cmd.Parameters.AddWithValue("@MaLop", lh.MaLop);
+            cmd.Parameters.AddWithValue("@TenLop", lh.TenLop);
+            cmd.Parameters.AddWithValue("@KhoaHoc", lh.KhoaHoc);
+            cmd.ExecuteNonQuery();
+            return true;            // thêm OK
+        }
+
+        public static DataTable GetAllLopHoc(string? kw = null)
+        {
+            using var c = new SqliteConnection(Conn);
+            c.Open();
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine(@"
+SELECT  lh.MaLop   AS MaLop,
+        lh.TenLop  AS TenLop,
+        lh.KhoaHoc AS KhoaHoc,
+        COUNT(sv.MaSV) AS SoHS
+FROM    LopHoc lh
+LEFT    JOIN SinhVien sv ON sv.MaLop = lh.MaLop
+WHERE   1 = 1");
+
+            if (!string.IsNullOrWhiteSpace(kw))
+                sb.AppendLine("  AND (lh.MaLop LIKE @kw OR lh.TenLop LIKE @kw)");
+
+            // *** thêm dấu cách hoặc xuống dòng rõ ràng ***
+            sb.AppendLine("GROUP BY lh.MaLop, lh.TenLop, lh.KhoaHoc");
+            sb.AppendLine("ORDER BY lh.MaLop;");
+
+            using var cmd = new SqliteCommand(sb.ToString(), c);
+            if (!string.IsNullOrWhiteSpace(kw))
+                cmd.Parameters.AddWithValue("@kw", $"%{kw.Trim()}%");
+
+            var dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+            return dt;
+        }
+
 
     }
 

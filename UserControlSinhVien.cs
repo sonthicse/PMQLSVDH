@@ -17,6 +17,8 @@ namespace PMQLSVDH
         {
             InitializeComponent();
 
+            comboBoxLop.DropDownStyle = ComboBoxStyle.DropDownList;
+
             // chỉ chọn 1 hàng
             dataGridView.MultiSelect = false;
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -41,7 +43,7 @@ namespace PMQLSVDH
             buttonXacNhan.Click += ButtonXacNhan_Click;
             buttonHuy.Click += (_, __) => ResetDetail();   // hủy sửa
 
-            var dtLop = DatabaseHelper.GetClassesOfGV();   // maGV = null → lấy tất cả lớp
+            var dtLop = DatabaseHelper.GetAllLopHoc();
             comboBoxLop.DataSource = dtLop;
             comboBoxLop.DisplayMember = "TenLop";          // tên hiển thị
             comboBoxLop.ValueMember = "MaLop";           // giá trị lưu

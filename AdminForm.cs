@@ -89,7 +89,7 @@ namespace PMQLSVDH
             navigationControl.Display(3);
             navigationButton.Highlight(buttonLopHoc);
 
-            lopHoc.dataGridView.DataSource = DatabaseHelper.GetClassesOfGV();
+            lopHoc.dataGridView.DataSource = DatabaseHelper.GetAllLopHoc();
         }
 
         private void buttonKhoa_Click(object sender, EventArgs e)

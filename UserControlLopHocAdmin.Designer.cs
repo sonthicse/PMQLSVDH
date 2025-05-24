@@ -97,6 +97,7 @@
             buttonThem.TabIndex = 4;
             buttonThem.Text = "THÊM";
             buttonThem.UseVisualStyleBackColor = true;
+            buttonThem.Click += buttonThem_Click;
             // 
             // buttonSearch
             // 

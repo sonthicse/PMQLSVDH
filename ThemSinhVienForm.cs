@@ -16,12 +16,13 @@ namespace PMQLSVDH
         {
             InitializeComponent();
             LoadComboLop();
+            comboBoxLop.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void LoadComboLop()
         {
             // 1. Lấy DataTable chứa MaLop, TenLop (và các cột khác, nhưng Combobox chỉ dùng 2 cột này)
-            var dt = DatabaseHelper.GetClassesOfGV(null);
+            var dt = DatabaseHelper.GetAllLopHoc();
 
             // 2. Gán nguồn dữ liệu
             comboBoxLop.DataSource = dt;

@@ -66,3 +66,4 @@ C:\Users\duong\OneDrive\ANHTTT59(CLC)\PMQLSVDH\bin\Debug\net9.0-windows\runtimes
 C:\Users\duong\OneDrive\ANHTTT59(CLC)\PMQLSVDH\bin\Debug\net9.0-windows\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\duong\OneDrive\ANHTTT59(CLC)\PMQLSVDH\obj\Debug\net9.0-windows\PMQLSVDH.UserControlMH.resources
 C:\Users\duong\OneDrive\ANHTTT59(CLC)\PMQLSVDH\obj\Debug\net9.0-windows\PMQLSVDH.ThemGiangVienForm.resources
+C:\Users\duong\OneDrive\ANHTTT59(CLC)\PMQLSVDH\obj\Debug\net9.0-windows\PMQLSVDH.ThemLopHocForm.resources

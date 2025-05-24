@@ -83,5 +83,15 @@ namespace PMQLSVDH
         {
 
         }
+
+        private void buttonThem_Click(object sender, EventArgs e)
+        {
+            using var f = new ThemLopHocForm();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                // Sau khi thêm thành công, reload lại danh sách lớp
+                dataGridView.DataSource = DatabaseHelper.GetAllLopHoc(); // hoặc hàm load riêng
+            }
+        }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PMQLSVDH")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ddd0d10a9453226109d42e16ba568bcbe566248")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db36f11d7b6fbaf563d6c2c5623bdeeaac7d3f3f")]
 [assembly: System.Reflection.AssemblyProductAttribute("PMQLSVDH")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PMQLSVDH")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
